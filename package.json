@@ -1,0 +1,23 @@
+{
+  "name": "kc-cli",
+  "version": "0.0.1",
+  "description": "CLI for Info Support Kenniscentrum (KC)",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@gitlab.rhea.infosupport.net:10022/kenniscentrum/kc-cli.git"
+  },
+  "keywords": [
+    "reveal",
+    "reveal.js",
+    "cli",
+    "kc"
+  ],
+  "author": "Manuel Riezebosch",
+  "license": "ISC"
+}
