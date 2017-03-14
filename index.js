@@ -8,14 +8,40 @@ var program = require('commander');
 
 program
   .version('0.0.1')
-  .option('-p, --peppers', 'Add peppers')
-  .option('-P, --pineapple', 'Add pineapple')
-  .option('-b, --bbq-sauce', 'Add bbq sauce')
-  .option('-c, --cheese [type]', 'Add the specified type of cheese [marble]', 'marble')
-  .parse(process.argv);
 
-console.log('you ordered a pizza with:');
-if (program.peppers) console.log('  - peppers');
-if (program.pineapple) console.log('  - pineapple');
-if (program.bbqSauce) console.log('  - bbq');
-console.log('  - %s cheese', program.cheese);
+program
+  .command('init')
+  .description('Alias for "yo reveal-infosupport"')
+  .action(function(cmd, options) { 
+    console.log('yo reveal-infosupport'); 
+  })
+  .on('--help', function() {
+    console.log('  Examples:');
+    console.log();
+    console.log('    $ kc init');
+  });
+
+program
+  .command('serve')
+  .description('Alias for "grunt serve"')
+  .action(function(cmd, options) {
+     console.log('yo grunt serve'); 
+  });
+
+program
+  .command('print')
+  .description('Print slide deck to PDF')
+  .command('init',  'Alias for "yo reveal-infosupport"')
+  .action(function(cmd, options) {
+    console.log('phantomjs plugin/print-pdf/print-pdf.js "http://localhost:9000/?print-pdf" slides.pdf'); 
+  });
+
+program
+  .command('dist')
+  .description('Alias for "grunt dist"')
+  .action(function(cmd, options) {
+    console.log('grunt dist'); 
+  });
+
+program.parse(process.argv);
+
