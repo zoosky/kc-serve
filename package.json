@@ -1,10 +1,20 @@
 {
-  "name": "kc-cli",
-  "version": "0.0.1",
+  "name": "@infosupport/kc-cli",
+  "version": "0.0.2",
   "description": "CLI for Info Support Kenniscentrum (KC)",
   "main": "index.js",
-  "dependencies": {},
-  "devDependencies": {},
+  "dependencies": {
+    "commander": "^2.9.0",
+    "cross-spawn": "^5.1.0"
+  },
+  "devDependencies": {
+  },
+  "peerDependencies": {
+    "generator-reveal-infosupport": "^1.0.1",
+    "phantomjs-prebuilt": "^2.1.14",
+    "grunt-cli": "^1.2.0",
+    "yo": "^1.8.5"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,8 +26,15 @@
     "reveal",
     "reveal.js",
     "cli",
-    "kc"
+    "kc",
+    "infosupport",
+    "presentation",
+    "slides",
+    "powerpoint"
   ],
   "author": "Manuel Riezebosch",
-  "license": "ISC"
+  "license": "ISC",
+  "bin": {
+    "kc": "index.js"
+  }
 }
