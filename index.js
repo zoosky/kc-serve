@@ -7,7 +7,9 @@ var program = require('commander');
 const spawn = require('cross-spawn');
 
 program
-  .version('0.0.2')
+  .version('0.0.4')
+
+spawn('npm', ['ls', '-g'])
 
 program
   .command('init')
@@ -33,7 +35,9 @@ program
   .description('Print slide deck to PDF')
   .command('init',  'Alias for "yo reveal-infosupport"')
   .action(function(cmd, options) {
-    spawn('phantomjs', ['bower_components/reveal.js/plugin/print-pdf/print-pdf.js', 'http://localhost:9000/?print-pdf', 'slides.pdf'], { stdio: 'inherit'});
+    var html = 'file:///' + process.cwd() + '/index.html?print-pdf';
+    console.log(html);
+    spawn('phantomjs', ['bower_components/reveal.js/plugin/print-pdf/print-pdf.js', html, 'slides.pdf'], { stdio: 'inherit'});
   });
 
 program
