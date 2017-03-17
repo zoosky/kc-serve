@@ -1,10 +1,11 @@
 {
   "name": "@infosupport/kc-cli",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "cli for Info Support Kenniscentrum (KC)",
   "main": "index.js",
   "dependencies": {
-    "commander": "^2.9.0"
+    "commander": "^2.9.0",
+    "cross-spawn": "^5.1.0"
   },
   "devDependencies": {
   },
