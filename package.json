@@ -1,18 +1,17 @@
 {
   "name": "@infosupport/kc-cli",
-  "version": "0.0.4",
-  "description": "CLI for Info Support Kenniscentrum (KC)",
+  "version": "0.0.6",
+  "description": "cli for Info Support Kenniscentrum (KC)",
   "main": "index.js",
   "dependencies": {
-    "commander": "^2.9.0",
-    "cross-spawn": "^5.1.0"
+    "commander": "^2.9.0"
   },
   "devDependencies": {
   },
   "peerDependencies": {
-    "generator-reveal-infosupport": "^1.0.1",
+    "@infosupport/generator-kc": "^0.0.2",
     "phantomjs-prebuilt": "^2.1.14",
-    "grunt-cli": "^1.2.0",
+    "gulp-cli": "^1.2.2",
     "yo": "^1.8.5"
   },
   "scripts": {

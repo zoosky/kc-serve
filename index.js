@@ -13,40 +13,30 @@ spawn('npm', ['ls', '-g'])
 
 program
   .command('init')
-  .description('Alias for "yo reveal-infosupport"')
+  .description('Alias for "yo @infosupport/kc"')
   .action(function(cmd, options) { 
-    spawn('yo', ['reveal-infosupport'], { stdio: 'inherit', });
+    spawn('yo', ['@infosupport/kc'], { stdio: 'inherit', });
   })
   .on('--help', function() {
-    console.log('  Examples:');
-    console.log();
-    console.log('    $ kc init');
+    console.log('  Create new or refresh existing presentation');
   });
 
 program
   .command('serve')
-  .description('Alias for "grunt serve"')
+  .description('Alias for "gulp serve"')
   .action(function(cmd, options) {
-    spawn('grunt', ['serve'], { stdio: 'inherit'});
+    spawn('gulp', ['serve'], { stdio: 'inherit'});
   });
 
 program
   .command('print')
   .description('Print slide deck to PDF')
-  .command('init',  'Alias for "yo reveal-infosupport"')
   .action(function(cmd, options) {
     var html = 'file:///' + process.cwd() + '/index.html?print-pdf';
     console.log(html);
     spawn('phantomjs', ['bower_components/reveal.js/plugin/print-pdf/print-pdf.js', html, 'slides.pdf'], { stdio: 'inherit'});
   });
-
-program
-  .command('dist')
-  .description('Alias for "grunt dist"')
-  .action(function(cmd, options) {
-    spawn('grunt', ['dist'], { stdio: 'inherit'});
-  });
-
+  
 program
   .command('install')
   .description('Install package dependencies after a fresh clone')
