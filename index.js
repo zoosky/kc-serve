@@ -7,9 +7,7 @@ var program = require('commander');
 const spawn = require('cross-spawn');
 
 program
-  .version('0.0.4')
-
-spawn('npm', ['ls', '-g'])
+  .version('0.0.11')
 
 program
   .command('init')
@@ -18,7 +16,7 @@ program
     spawn('yo', ['@infosupport/kc'], { stdio: 'inherit', });
   })
   .on('--help', function() {
-    console.log('  Create new or refresh existing presentation');
+    console.log('  (re)scaffold a presentation');
   });
 
 program
@@ -26,23 +24,27 @@ program
   .description('Alias for "gulp serve"')
   .action(function(cmd, options) {
     spawn('gulp', ['serve'], { stdio: 'inherit'});
+  }).on('--help', function () {
+    console.log('  serve presentation on localhost with live reload')
   });
 
 program
   .command('print')
   .description('Print slide deck to PDF')
   .action(function(cmd, options) {
-    var html = 'file:///' + process.cwd() + '/index.html?print-pdf';
-    console.log(html);
-    spawn('phantomjs', ['bower_components/reveal.js/plugin/print-pdf/print-pdf.js', html, 'slides.pdf'], { stdio: 'inherit'});
+    spawn('gulp', ['print'], { stdio: 'inherit'});
+  }).on('--help', function () {
+    console.log('  print slide deck to PDF using phantomjs')
   });
   
 program
   .command('install')
-  .description('Install package dependencies after a fresh clone')
+  .description('Alias for npm install && bower install')
   .action(function(cmd, options) {
     spawn('npm', ['install'], { stdio: 'inherit'});
     spawn('bower', ['install'], { stdio: 'inherit'});
+  }).on('--help', function () {
+    console.log('  install local dependencies from package.json and bower.json')
   });  
 
 program.parse(process.argv);

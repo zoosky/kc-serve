@@ -1,6 +1,6 @@
 {
   "name": "@infosupport/kc-cli",
-  "version": "0.0.7",
+  "version": "0.0.12",
   "description": "cli for Info Support Kenniscentrum (KC)",
   "main": "index.js",
   "dependencies": {
@@ -10,10 +10,11 @@
   "devDependencies": {
   },
   "peerDependencies": {
-    "@infosupport/generator-kc": "^0.0.2",
-    "phantomjs-prebuilt": "^2.1.14",
-    "gulp-cli": "^1.2.2",
-    "yo": "^1.8.5"
+    "@infosupport/generator-kc": "0.x",
+    "phantomjs-prebuilt": "2.1.x",
+    "gulp-cli": "1.x",
+    "yo": "1.x",
+    "bower": "1.x"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
