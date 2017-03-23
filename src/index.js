@@ -25,6 +25,17 @@ program
       }), cwd)
   });
 
+program
+  .command('help')
+  .action((cmd, options) => { 
+      var cwd = path.join(path.dirname(__filename), 'help');
+      server(template(
+      { 
+        title: 'kc - help',
+        slides: resolve(cwd)
+      }), cwd)
+});
+
 program.parse(process.argv);
 
 if (!program.args.length) program.help();
