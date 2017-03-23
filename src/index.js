@@ -7,7 +7,7 @@ var program = require('commander');
 const spawn = require('cross-spawn');
 var server = require('./server')
 var template = require('./template')
-var resolve = require('./resolve-slides')
+var resolver = require('./resolver')
 var path = require('path')
 
 program
@@ -20,7 +20,8 @@ program
     var cwd = path.join(process.cwd())
     var data = { 
         title: path.basename(process.cwd()),
-        slides: resolve(cwd),
+        slides: resolver.slides(cwd),
+        css: resolver.css(cwd),
         server: {}
     };
 
@@ -34,7 +35,7 @@ program
       var cwd = path.join(__dirname, 'help');
       var data = { 
         title: 'kc - help',
-        slides: resolve(cwd),
+        slides: resolver.slides(cwd),
         server: {}
       };
 

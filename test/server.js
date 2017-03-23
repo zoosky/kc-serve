@@ -64,6 +64,12 @@ describe('loading express', () => {
             .expect(200, done);
     })
 
+    it ('serves css files to /css', done => {
+        request(server)
+            .get('/css/demo.css')
+            .expect(200, done);
+    });
+
     it('404 everything else', (done) => {
         request(server)
             .get('/foo/bar')

@@ -1,10 +1,10 @@
 var should = require('should');
 var path = require('path');
-var resolve = require('../src/resolve-slides')
+var resolver = require('../src/resolver')
 
-describe('resolveSlides', () =>{
+describe('resolverSlides', () =>{
     it('should iterate folders and files', () => {
-        resolve(path.join(__dirname, 'test_data'))
+        resolver.slides(path.join(__dirname, 'test_data'))
             .should.deepEqual([ 
                 { 
                     isImage: false,
@@ -25,27 +25,34 @@ describe('resolveSlides', () =>{
 
 describe('isImage', () => {
     it('png', () => {
-        resolve.isImage('bower.png').should.true();
+        resolver.isImage('bower.png').should.true();
     })
 
     it('gif', () => {
-        resolve.isImage('questionmark.gif').should.true();
+        resolver.isImage('questionmark.gif').should.true();
     })
 
     it('jpg', () => {
-        resolve.isImage('photo.jpg').should.true();
+        resolver.isImage('photo.jpg').should.true();
     })
 
     it('jpeg', () => {
-        resolve.isImage('photo.jpeg').should.true();
+        resolver.isImage('photo.jpeg').should.true();
     })
 
     it('svg', () => {
-        resolve.isImage('photo.svg').should.true();
+        resolver.isImage('photo.svg').should.true();
     })
 
     it ('zip', () => {
-        resolve.isImage('demo.zip').should.false();
+        resolver.isImage('demo.zip').should.false();
+    })
+})
+
+describe('resolver-css', () => {
+    it('should list css-files in the /css directory', () => {
+        var dir = path.join(__dirname, 'test_data');
+        resolver.css(dir).should.deepEqual(['demo.css']);
     })
 })
 

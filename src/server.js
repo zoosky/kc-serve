@@ -18,6 +18,7 @@ module.exports = (template, data, cwd) => {
     app.use('/theme', express.static(theme));
 
     app.use('/img', express.static(path.join(cwd, 'img')));
+    app.use('/css', express.static(path.join(cwd, 'css')));
     
     data.server.slides = '/slides'
     app.use('/slides', express.static(path.join(cwd, 'slides')));

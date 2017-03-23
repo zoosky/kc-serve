@@ -52,7 +52,7 @@ describe('template', () => {
             css: () => [ 'custom.css' ]
         }
 
-        template()(data).should.match(/<link rel="stylesheet" href=\/custom_css\/custom.css>/m);
+        template()(data).should.match(/<link rel="stylesheet" href=\/css\/custom.css>/m);
     })
 
     it ('should include default vs highlight theme', () => {
