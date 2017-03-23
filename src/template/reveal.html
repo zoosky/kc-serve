@@ -23,23 +23,19 @@
 
         <div class="reveal">
             <div class="slides">
-              {{#slides}}
-              {{^.length}}
+            {{#each slides}}
+              {{#unless path}}
               <section>
-              {{/.length}}
-                {{#.}}
-                  {{#isImage}}
-                  <section><img src="/slides/{{path}}" class="stretch" /></section>
-                  {{/isImage}}
-
-                  {{^isImage}}
-                  <section data-markdown="/slides/{{path}}" data-separator="^---$"  data-separator-vertical="^--$" data-separator-notes="^Note:"></section>
-                  {{/isImage}}
-                {{/.}}
-              {{^.length}}
+                {{#each this}}
+                  {{> slide .}}
+                {{/each}}
               </section>
-              {{/.length}}
-              {{/slides}}
+              {{/unless}}
+
+              {{#if path}}
+                  {{> slide .}}
+              {{/if}}
+            {{/each}}
             </div>
         </div>
 

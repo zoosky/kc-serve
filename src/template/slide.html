@@ -1,0 +1,7 @@
+                  {{#isImage}}
+                  <section><img src="/slides/{{path}}" class="stretch" /></section>
+                  {{/isImage}}
+
+                  {{^isImage}}
+                  <section data-markdown="/slides/{{path}}" data-separator="^---$"  data-separator-vertical="^--$"></section>
+                  {{/isImage}}

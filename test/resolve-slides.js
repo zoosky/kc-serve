@@ -40,6 +40,10 @@ describe('isImage', () => {
         resolve.isImage('photo.jpeg').should.true();
     })
 
+    it('svg', () => {
+        resolve.isImage('photo.svg').should.true();
+    })
+
     it ('zip', () => {
         resolve.isImage('demo.zip').should.false();
     })

@@ -21,6 +21,6 @@ function filter(file) {
 }
 
 function isImage(file) {
-    return includes(['.png', '.gif', '.jpg', '.jpeg'], path.extname(file));
+    return includes(['.png', '.gif', '.jpg', '.jpeg', '.svg'], path.extname(file));
 }
 module.exports.isImage = isImage;
