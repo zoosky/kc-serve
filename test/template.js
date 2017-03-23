@@ -6,8 +6,7 @@ describe('template', () => {
         var data = { 
             title: 'test'
         };
-        template(data)
-            .toString().should.match(/<div class="reveal"/m);
+        template(data).should.match(/<div class="reveal"/m);
     });
 
     it ('should list a slide', () => {
@@ -16,8 +15,7 @@ describe('template', () => {
             title: 'test'
         };
 
-        template(data)
-            .toString().should.match(/<section data-markdown="slides\/00-intro.md"/m);
+        template(data).should.match(/<section data-markdown="slides\/00-intro.md"/m);
     })
 
 
@@ -27,7 +25,16 @@ describe('template', () => {
             title: 'test'
         };
 
-        template(data)
-            .toString().should.match(/<section>[\n\r\s]*<section data-markdown="slides\/00-intro.md"/m);
+        template(data).should.match(/<section>[\n\r\s]*<section data-markdown="slides\/00-intro.md"/m);
+    })
+
+    it ('should include custom css', () => {
+        var data = {
+            title: 'test',
+            css: () => [ 'custom.css' ],
+            base: 'http://localhost'
+        }
+
+        template(data).should.match(/<link rel="stylesheet" href=http:\/\/localhost\/custom_css\/custom.css>/m);
     })
 })
