@@ -4,6 +4,7 @@
   "description": "cli for Info Support Kenniscentrum (KC)",
   "main": "index.js",
   "dependencies": {
+    "array-includes": "^3.0.2",
     "commander": "^2.9.0",
     "cross-spawn": "^5.1.0",
     "highlight.js": "^9.10.0"
