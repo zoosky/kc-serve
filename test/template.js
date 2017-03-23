@@ -1,7 +1,5 @@
 var should = require('should');
-var fs = require('fs');
-var path = require('path');
-var mustache = require('mustache');
+var template = require('../src/template');
 
 describe('template', () => {
     it('should render', () => {
@@ -32,9 +30,4 @@ describe('template', () => {
         template(data)
             .toString().should.match(/<section>[\n\r\s]*<section data-markdown="slides\/00-intro.md"/m);
     })
-
-    function template(data) {
-        var f = path.join(__filename, '../../src/template/reveal.html');
-        return mustache.to_html(fs.readFileSync(f).toString(), data);
-    }
 })
