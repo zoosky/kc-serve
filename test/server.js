@@ -11,7 +11,7 @@ describe('loading express', () => {
     beforeEach(() => {
         delete require.cache[require.resolve('../src/server')];
 
-        var cwd = path.dirname(__filename);
+        var cwd = path.join(__dirname, 'test_data');
         server = require('../src/server')((data) => "# demo", { title: 'test', server: {} }, cwd);
     });
     

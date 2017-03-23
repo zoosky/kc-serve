@@ -14,7 +14,7 @@ module.exports = (template, data, cwd) => {
     var highlight = path.resolve(require.resolve('highlight.js'), '..', '..', 'styles');
     app.use('/css/highlight', express.static(highlight));
 
-    var theme = path.join(__filename, '..', 'theme');
+    var theme = path.join(__dirname, 'theme');
     app.use('/theme', express.static(theme));
 
     app.use('/img', express.static(path.join(cwd, 'img')));

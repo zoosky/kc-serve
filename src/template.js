@@ -3,7 +3,7 @@ var path = require('path');
 var handlebars = require('handlebars');
 
 module.exports = () => {
-    var dir = path.join(__filename, '..', '..', 'src', 'template')
+    var dir = path.join(__dirname, 'template')
     var html = path.join(dir, 'reveal.html');
     var slide = path.join(dir, 'slide.html');
 

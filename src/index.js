@@ -31,7 +31,7 @@ program
   .command('help')
   .description('view presentation about this tool')
   .action((cmd, options) => { 
-      var cwd = path.join(path.dirname(__filename), 'help');
+      var cwd = path.join(__dirname, 'help');
       var data = { 
         title: 'kc - help',
         slides: resolve(cwd),

@@ -4,7 +4,7 @@ var resolve = require('../src/resolve-slides')
 
 describe('resolveSlides', () =>{
     it('should iterate folders and files', () => {
-        resolve(path.dirname(__filename))
+        resolve(path.join(__dirname, 'test_data'))
             .should.deepEqual([ 
                 { 
                     isImage: false,
