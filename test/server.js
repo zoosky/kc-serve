@@ -2,6 +2,7 @@
 
 var request = require('supertest');
 var should = require('should');
+var path = require('path');
 var debug = require('debug')('test');
 
 describe('loading express', () => {
@@ -9,7 +10,9 @@ describe('loading express', () => {
 
     beforeEach(() => {
         delete require.cache[require.resolve('../src/server')];
-        server = require('../src/server')(() => "# demo");
+
+        var slides = path.join(__filename, '..', 'slides');
+        server = require('../src/server')(() => "# demo", slides);
     });
     afterEach((done) => {
         server.close(done);
@@ -46,6 +49,13 @@ describe('loading express', () => {
             .expect(res => res.text.should.match(/Info Support theme for reveal.js presentations/m))
             .expect(200, done);
     });
+
+    it ('serves slides to /slides', done => {
+        request(server)
+            .get('/slides/00-intro.md')
+            .expect(res => res.text.should.match(/# title/m))
+            .expect(200, done);
+    })
 
     it('404 everything else', (done) => {
         request(server)

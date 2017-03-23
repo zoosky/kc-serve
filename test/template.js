@@ -15,7 +15,7 @@ describe('template', () => {
             title: 'test'
         };
 
-        template(data)().should.match(/<section data-markdown="slides\/00-intro.md"/m);
+        template(data)().should.match(/<section data-markdown="\/slides\/00-intro.md"/m);
     })
 
 
@@ -25,7 +25,7 @@ describe('template', () => {
             title: 'test'
         };
 
-        template(data)().should.match(/<section>[\n\r\s]*<section data-markdown="slides\/00-intro.md"/m);
+        template(data)().should.match(/<section>[\n\r\s]*<section data-markdown="\/slides\/00-intro.md"/m);
     })
 
     it ('should include custom css', () => {

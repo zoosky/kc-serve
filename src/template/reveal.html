@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="/reveal/css/reveal.css">
         <link rel="stylesheet" href="/theme/infosupport.css" id="theme">
         <link rel="stylesheet" href="/css/highlight/{{{highlightTheme}}}.css">
-        <link rel="stylesheet" href="/css/print/{{#print}}pdf{{/print}}{{^print}}paper{{/print}}.css" type="text/css" media="print">
+        <link rel="stylesheet" href="/reveal/css/print/{{#print}}pdf{{/print}}{{^print}}paper{{/print}}.css" type="text/css" media="print">
         {{#css}}
         <link rel="stylesheet" href=/custom_css/{{{.}}}>
         {{/css}}
@@ -26,11 +26,11 @@
               {{/.length}}
                 {{#.}}
                   {{#isImage}}
-                  <section data-background="slides/{{path}}" data-background-size="contain"></section>
+                  <section data-background="/slides/{{path}}" data-background-size="contain"></section>
                   {{/isImage}}
 
                   {{^isImage}}
-                  <section data-markdown="slides/{{path}}" data-separator="^---$"  data-separator-vertical="^--$" data-separator-notes="^Note:"></section>
+                  <section data-markdown="/slides/{{path}}" data-separator="^---$"  data-separator-vertical="^--$" data-separator-notes="^Note:"></section>
                   {{/isImage}}
                 {{/.}}
               {{^.length}}
@@ -81,7 +81,7 @@
             // options from URL query string
             var queryOptions = Reveal.getQueryHash() || {};
 
-            var options = {{{revealOptionsStr}}};
+            var options = {};//{{{revealOptionsStr}}};
             options = extend(defaultOptions, options, queryOptions);
             Reveal.initialize(options);
         </script>

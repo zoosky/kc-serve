@@ -17,12 +17,12 @@ program
   .command('serve')
   .description('serve presentation slides directory')
   .action(function(cmd, options) {
+    var slides = path.join(process.cwd(), 'slides');
     server(template(
       { 
         title: 'kc',
-        slides: resolve(path.join(process.cwd(), 'slides')),
-        base: 'http://localhost:3000'
-      }))
+        slides: resolve(slides)
+      }), slides)
   }).on('--help', function () {
   });
 
