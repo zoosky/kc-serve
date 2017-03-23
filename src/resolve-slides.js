@@ -2,8 +2,8 @@ var fs = require('fs');
 var path = require('path');
 var includes = require('array-includes');
 
-module.exports = (root) => {
-    return readTree(root, '');
+module.exports = (cwd) => {
+    return readTree(path.join(cwd, 'slides'), '');
 }
 
 function readTree(root, dir) {

@@ -3,7 +3,7 @@ var app = express();
 var fs = require('fs');
 var path = require('path');
 
-module.exports = (template, slides) => {
+module.exports = (template, cwd) => {
     app.get('/', (req, res) => {
         res.status(200).send(template());
     });
@@ -17,7 +17,8 @@ module.exports = (template, slides) => {
     var theme = path.join(__filename, '..', 'theme');
     app.use('/theme', express.static(theme));
 
-    app.use('/slides', express.static(slides));
+    app.use('/img', express.static(path.join(cwd, 'img')));
+    app.use('/slides', express.static(path.join(cwd, 'slides')));
 
     var server = app.listen(3000, function () {
         var port = server.address().port;

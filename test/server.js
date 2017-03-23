@@ -11,8 +11,8 @@ describe('loading express', () => {
     beforeEach(() => {
         delete require.cache[require.resolve('../src/server')];
 
-        var slides = path.join(__filename, '..', 'slides');
-        server = require('../src/server')(() => "# demo", slides);
+        var cwd = path.dirname(__filename);
+        server = require('../src/server')(() => "# demo", cwd);
     });
     afterEach((done) => {
         server.close(done);
@@ -54,6 +54,12 @@ describe('loading express', () => {
         request(server)
             .get('/slides/00-intro.md')
             .expect(res => res.text.should.match(/# title/m))
+            .expect(200, done);
+    })
+
+    it ('serves img to /img', done => {
+        request(server)
+            .get('/img/plaatje.jpg')
             .expect(200, done);
     })
 
