@@ -39,6 +39,14 @@ describe('loading express', () => {
             .expect(200, done);
     });
 
+    it ('serves theme files to /theme', done => {
+        request(server)
+            .get('/theme/infosupport.css')
+            .expect(res => debug(res))
+            .expect(res => res.text.should.match(/Info Support theme for reveal.js presentations/m))
+            .expect(200, done);
+    });
+
     it('404 everything else', (done) => {
         request(server)
             .get('/foo/bar')

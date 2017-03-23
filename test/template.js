@@ -6,7 +6,7 @@ describe('template', () => {
         var data = { 
             title: 'test'
         };
-        template(data).should.match(/<div class="reveal"/m);
+        template(data)().should.match(/<div class="reveal"/m);
     });
 
     it ('should list a slide', () => {
@@ -15,7 +15,7 @@ describe('template', () => {
             title: 'test'
         };
 
-        template(data).should.match(/<section data-markdown="slides\/00-intro.md"/m);
+        template(data)().should.match(/<section data-markdown="slides\/00-intro.md"/m);
     })
 
 
@@ -25,35 +25,32 @@ describe('template', () => {
             title: 'test'
         };
 
-        template(data).should.match(/<section>[\n\r\s]*<section data-markdown="slides\/00-intro.md"/m);
+        template(data)().should.match(/<section>[\n\r\s]*<section data-markdown="slides\/00-intro.md"/m);
     })
 
     it ('should include custom css', () => {
         var data = {
             title: 'test',
-            css: () => [ 'custom.css' ],
-            base: 'http://localhost'
+            css: () => [ 'custom.css' ]
         }
 
-        template(data).should.match(/<link rel="stylesheet" href=http:\/\/localhost\/custom_css\/custom.css>/m);
+        template(data)().should.match(/<link rel="stylesheet" href=\/custom_css\/custom.css>/m);
     })
 
     it ('should include default vs highlight theme', () => {
         var data = {
-            title: 'test',
-            base: 'http://localhost'
+            title: 'test'
         }
 
-        template(data).should.match(/<link rel="stylesheet" href="http:\/\/localhost\/css\/highlight\/vs.css">/m);
+        template(data)().should.match(/<link rel="stylesheet" href="\/css\/highlight\/vs.css">/m);
     })
 
     it ('should include specified highlight theme', () => {
         var data = {
             title: 'test',
-            base: 'http://localhost',
             highlightTheme: 'zenburn'
         }
 
-        template(data).should.match(/<link rel="stylesheet" href="http:\/\/localhost\/css\/highlight\/zenburn.css">/m);
+        template(data)().should.match(/<link rel="stylesheet" href="\/css\/highlight\/zenburn.css">/m);
     })
 })

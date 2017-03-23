@@ -14,6 +14,9 @@ module.exports = template => {
     var highlight = path.resolve(require.resolve('highlight.js'), '..', '..', 'styles');
     app.use('/css/highlight', express.static(highlight));
 
+    var theme = path.join(__filename, '..', 'theme');
+    app.use('/theme', express.static(theme));
+
     var server = app.listen(3000, function () {
         var port = server.address().port;
         console.log('Example app listening at port %s', port);
