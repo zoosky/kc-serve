@@ -5,7 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "commander": "^2.9.0",
-    "cross-spawn": "^5.1.0"
+    "cross-spawn": "^5.1.0",
+    "highlight.js": "^9.10.0"
   },
   "devDependencies": {
     "debug": "^2.6.3",

@@ -11,6 +11,9 @@ module.exports = template => {
     var reveal = path.resolve(require.resolve('reveal.js'), '..', '..');
     app.use('/reveal', express.static(reveal));
 
+    var highlight = path.resolve(require.resolve('highlight.js'), '..', '..', 'styles');
+    app.use('/css/highlight', express.static(highlight));
+
     var server = app.listen(3000, function () {
         var port = server.address().port;
         console.log('Example app listening at port %s', port);

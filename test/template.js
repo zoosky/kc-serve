@@ -37,4 +37,23 @@ describe('template', () => {
 
         template(data).should.match(/<link rel="stylesheet" href=http:\/\/localhost\/custom_css\/custom.css>/m);
     })
+
+    it ('should include default vs highlight theme', () => {
+        var data = {
+            title: 'test',
+            base: 'http://localhost'
+        }
+
+        template(data).should.match(/<link rel="stylesheet" href="http:\/\/localhost\/css\/highlight\/vs.css">/m);
+    })
+
+    it ('should include specified highlight theme', () => {
+        var data = {
+            title: 'test',
+            base: 'http://localhost',
+            highlightTheme: 'zenburn'
+        }
+
+        template(data).should.match(/<link rel="stylesheet" href="http:\/\/localhost\/css\/highlight\/zenburn.css">/m);
+    })
 })

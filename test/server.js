@@ -31,6 +31,14 @@ describe('loading express', () => {
             .expect(200, done);
     });
 
+    it ('serves highlight files to /highlight', done => {
+        request(server)
+            .get('/css/highlight/vs.css')
+            .expect(res => debug(res))
+            .expect(res => res.text.should.match(/Visual Studio-like style based on original C# coloring by Jason Diamond <jason@diamond.name>/m))
+            .expect(200, done);
+    });
+
     it('404 everything else', (done) => {
         request(server)
             .get('/foo/bar')
