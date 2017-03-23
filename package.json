@@ -1,6 +1,6 @@
 {
   "name": "@infosupport/kc-cli",
-  "version": "0.0.12",
+  "version": "2.0.0",
   "description": "cli for Info Support Kenniscentrum (KC)",
   "main": "index.js",
   "dependencies": {

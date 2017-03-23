@@ -3,9 +3,9 @@ var app = express();
 var fs = require('fs');
 var path = require('path');
 
-module.exports = (template, cwd) => {
+module.exports = (template, data, cwd) => {
     app.get('/', (req, res) => {
-        res.status(200).send(template());
+        res.status(200).send(template(data));
     });
 
     var reveal = path.resolve(require.resolve('reveal.js'), '..', '..');
@@ -18,6 +18,8 @@ module.exports = (template, cwd) => {
     app.use('/theme', express.static(theme));
 
     app.use('/img', express.static(path.join(cwd, 'img')));
+    
+    data.server.slides = '/slides'
     app.use('/slides', express.static(path.join(cwd, 'slides')));
 
     var server = app.listen(3000, function () {

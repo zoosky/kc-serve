@@ -3,5 +3,5 @@
                   {{/isImage}}
 
                   {{^isImage}}
-                  <section data-markdown="/slides/{{path}}" data-separator="^---$"  data-separator-vertical="^--$"></section>
+                  <section data-markdown="{{mount}}/{{slide.path}}" data-separator="^---$"  data-separator-vertical="^--$"></section>
                   {{/isImage}}

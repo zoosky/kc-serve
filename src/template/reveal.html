@@ -27,13 +27,13 @@
               {{#unless path}}
               <section>
                 {{#each this}}
-                  {{> slide .}}
+                  {{> slide slide=. mount=@root.server.slides}}
                 {{/each}}
               </section>
               {{/unless}}
 
               {{#if path}}
-                  {{> slide .}}
+                  {{> slide slide=. mount=@root.server.slides}}
               {{/if}}
             {{/each}}
             </div>
