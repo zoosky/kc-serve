@@ -9,7 +9,7 @@ describe('loading express', () => {
 
     beforeEach(() => {
         delete require.cache[require.resolve('../src/server')];
-        server = require('../src/server')("# demo");
+        server = require('../src/server')(() => "# demo");
     });
     afterEach((done) => {
         server.close(done);

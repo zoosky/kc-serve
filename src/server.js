@@ -5,7 +5,7 @@ var path = require('path');
 
 module.exports = template => {
     app.get('/', (req, res) => {
-        res.status(200).send(template);
+        res.status(200).send(template());
     });
 
     var reveal = path.resolve(require.resolve('reveal.js'), '..', '..');
