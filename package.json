@@ -7,14 +7,14 @@
     "array-includes": "^3.0.2",
     "commander": "^2.9.0",
     "cross-spawn": "^5.1.0",
-    "highlight.js": "^9.10.0"
+    "express": "^4.15.2",
+    "highlight.js": "^9.10.0",
+    "reveal.js": "^3.4.1"
   },
   "devDependencies": {
     "debug": "^2.6.3",
-    "express": "^4.15.2",
     "mocha": "^3.2.0",
-    "really-need": "^1.9.2",
-    "reveal.js": "^3.4.1",
+    "should": "^11.2.1",
     "supertest": "^3.0.0"
   },
   "peerDependencies": {},
@@ -38,6 +38,6 @@
   "author": "Manuel Riezebosch",
   "license": "ISC",
   "bin": {
-    "kc": "lib/index.js"
+    "kc": "src/index.js"
   }
 }
