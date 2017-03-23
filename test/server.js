@@ -23,6 +23,14 @@ describe('loading express', () => {
             .expect(200, done);
     });
 
+    it ('serves reveal files to /reveal', done => {
+        request(server)
+            .get('/reveal/css/reveal.css')
+            .expect(res => debug(res))
+            .expect(res => res.text.should.match(/html, body, .reveal div/m))
+            .expect(200, done);
+    });
+
     it('404 everything else', (done) => {
         request(server)
             .get('/foo/bar')
