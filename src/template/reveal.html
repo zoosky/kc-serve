@@ -26,11 +26,11 @@
               {{/.length}}
                 {{#.}}
                   {{#isImage}}
-                  <section data-background="slides/{{p}}" data-background-size="contain"></section>
+                  <section data-background="slides/{{path}}" data-background-size="contain"></section>
                   {{/isImage}}
 
                   {{^isImage}}
-                  <section data-markdown="slides/{{p}}" data-separator="^---$"  data-separator-vertical="^--$" data-separator-notes="^Note:"></section>
+                  <section data-markdown="slides/{{path}}" data-separator="^---$"  data-separator-vertical="^--$" data-separator-notes="^Note:"></section>
                   {{/isImage}}
                 {{/.}}
               {{^.length}}
