@@ -2,8 +2,23 @@ var fs = require('fs');
 var path = require('path');
 var includes = require('array-includes');
 
-module.exports.slides = (cwd) => readTree(path.join(cwd, 'slides'), '');
-module.exports.css = (root) => fs.readdirSync(path.join(root, 'css'));
+module.exports.slides = (root) =>  {
+    var folder = path.join(root, 'slides');
+    if (fs.existsSync(folder))  {
+        return readTree(folder, '');
+    }
+
+    return [];
+}
+
+module.exports.css = (root) => {
+    var folder = path.join(root, 'css');
+    if (fs.existsSync(folder))  {
+        return fs.readdirSync(folder);
+    }
+
+    return [];
+} 
 
 function readTree(root, dir) {
    return fs

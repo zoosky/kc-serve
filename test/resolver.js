@@ -21,6 +21,10 @@ describe('resolverSlides', () =>{
                     }
                 ]]);
     })
+
+    it ('should not fail on no folder', () => {
+        resolver.slides('asdfasdfasdf');
+    })
 })
 
 describe('isImage', () => {
@@ -53,6 +57,10 @@ describe('resolver-css', () => {
     it('should list css-files in the /css directory', () => {
         var dir = path.join(__dirname, 'test_data');
         resolver.css(dir).should.deepEqual(['demo.css']);
+    })
+
+    it ('should not fail on no folder', () => {
+        resolver.css('asdfasdfasdf');
     })
 })
 
