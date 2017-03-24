@@ -10,7 +10,7 @@
     "express": "^4.15.2",
     "handlebars": "^4.0.6",
     "highlight.js": "^9.10.0",
-    "reveal.js": "^3.4.1"
+    "reveal.js": "git+https://github.com/riezebosch/reveal.js.git"
   },
   "devDependencies": {
     "debug": "^2.6.3",
