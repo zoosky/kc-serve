@@ -2,17 +2,15 @@ var express = require('express');
 var app = express();
 var fs = require('fs');
 var path = require('path');
+var resolver = require('./resolver')
 
 module.exports = (template, data, cwd) => {
     app.get('/', (req, res) => {
         res.status(200).send(template(data));
     });
 
-    var reveal = path.resolve(require.resolve('reveal.js'), '..', '..');
-    app.use('/reveal', express.static(reveal));
-
-    var highlight = path.resolve(require.resolve('highlight.js'), '..', '..', 'styles');
-    app.use('/css/highlight', express.static(highlight));
+    app.use('/reveal', express.static(resolver.reveal()));
+    app.use('/css/highlight', express.static(path.join(resolver.highlight(), 'styles')));
 
     var theme = path.join(__dirname, 'theme');
     app.use('/theme', express.static(theme));

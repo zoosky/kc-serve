@@ -64,3 +64,14 @@ describe('resolver-css', () => {
     })
 })
 
+describe('resolver-reveal', () => {
+    it ('should resolve the package location of reveal.js', () => {
+        resolver.reveal().should.match(/\/kc-cli\/node_modules\/reveal.js$/g)
+    })
+})
+
+describe('resolver-highlight', () => {
+    it ('should resolve the package location of highlight.js', () => {
+        resolver.highlight().should.match(/\/kc-cli\/node_modules\/highlight.js$/g)
+    })
+})

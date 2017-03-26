@@ -20,6 +20,9 @@ module.exports.css = (root) => {
     return [];
 } 
 
+module.exports.reveal = () => path.resolve(require.resolve('reveal.js'), '..', '..');
+module.exports.highlight = () => path.resolve(require.resolve('highlight.js'), '..', '..');
+
 function readTree(root, dir) {
    return fs
     .readdirSync(path.join(root, dir))
