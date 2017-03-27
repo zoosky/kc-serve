@@ -1,10 +1,9 @@
 var express = require('express');
 var app = express();
-var fs = require('fs');
 var path = require('path');
 var resolver = require('./resolver')
 
-module.exports = (template, data, cwd) => {
+module.exports = (template, data, options) => {
     app.get('/', (req, res) => {
         res.status(200).send(template(data));
     });
@@ -15,15 +14,15 @@ module.exports = (template, data, cwd) => {
     var theme = path.join(__dirname, 'theme');
     app.use('/theme', express.static(theme));
 
-    app.use('/img', express.static(path.join(cwd, 'img')));
-    app.use('/css', express.static(path.join(cwd, 'css')));
+    app.use('/img', express.static(path.join(options.cwd, 'img')));
+    app.use('/css', express.static(path.join(options.cwd, 'css')));
     
     data.server.slides = '/slides'
-    app.use('/slides', express.static(path.join(cwd, 'slides')));
+    app.use('/slides', express.static(path.join(options.cwd, 'slides')));
 
-    var server = app.listen(3000, function () {
+    var server = app.listen(options.port, function () {
         var port = server.address().port;
-        console.log('Example app listening at port %s', port);
+        console.log('Presentation available at: http://localhost:%s', options.port);
     });
 
     return server;

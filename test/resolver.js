@@ -4,7 +4,7 @@ var resolver = require('../src/resolver')
 
 describe('resolverSlides', () =>{
     it('should iterate folders and files', () => {
-        resolver.slides(path.join(__dirname, 'test_data'))
+        resolver(path.join(__dirname, 'test_data')).slides()
             .should.deepEqual([ 
                 { 
                     isImage: false,
@@ -23,7 +23,7 @@ describe('resolverSlides', () =>{
     })
 
     it ('should not fail on no folder', () => {
-        resolver.slides('asdfasdfasdf');
+        resolver('asdfasdfasdf').slides();
     })
 })
 
@@ -56,11 +56,11 @@ describe('isImage', () => {
 describe('resolver-css', () => {
     it('should list css-files in the /css directory', () => {
         var dir = path.join(__dirname, 'test_data');
-        resolver.css(dir).should.deepEqual(['demo.css']);
+        resolver(dir).css().should.deepEqual(['demo.css']);
     })
 
     it ('should not fail on no folder', () => {
-        resolver.css('asdfasdfasdf');
+        resolver('asdfasdfasdf').css();
     })
 })
 

@@ -12,7 +12,7 @@ describe('loading express', () => {
         delete require.cache[require.resolve('../src/server')];
 
         var cwd = path.join(__dirname, 'test_data');
-        server = require('../src/server')((data) => "# demo", { title: 'test', server: {} }, cwd);
+        server = require('../src/server')((data) => "# demo", { title: 'test', server: {} }, { cwd: cwd, port: 8384 });
     });
     
     afterEach((done) => {

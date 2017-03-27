@@ -16,32 +16,34 @@ program
 program
   .command('serve')
   .description('serve presentation from slides directory')
-  .action(function(cmd, options) {
-    var cwd = path.join(process.cwd())
+  .option('-p, --port <port>', 'host presentation on port')
+  .option('-d, --dir <directory>', 'presentation directory')
+  .action((cmd, options) => {
+    var cwd = cmd.dir || path.join(process.cwd())
+    var r = resolver(cwd);
+
     var data = { 
         title: path.basename(process.cwd()),
-        slides: resolver.slides(cwd),
-        css: resolver.css(cwd),
+        slides: r.slides(),
+        css: r.css(),
         server: {}
     };
 
-    server(template(), data, cwd);
-  });
+    server(template(), data, { cwd: cwd, port: cmd.port || 3000 });
+  })
 
 program
   .command('help')
-  .description('view presentation about this tool')
+  .description('view presentation on how to create slick presentations')
   .action((cmd, options) => { 
       var cwd = path.join(__dirname, 'help');
       var data = { 
         title: 'kc - help',
-        slides: resolver.slides(cwd),
+        slides: resolver(cwd).slides(),
         server: {}
       };
 
-      server(template(), data, cwd)
+      server(template(), data, { cwd: cwd, port: 3001 })
 });
 
 program.parse(process.argv);
-
-if (!program.args.length) program.help();
