@@ -1,6 +1,8 @@
 Groepeer modules in subfolders*:
 
 ```bash
+css
+img
 slides
   + 00-eerste module
   |  + 00-eerste onderwerp.md

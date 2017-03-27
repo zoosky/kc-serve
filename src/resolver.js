@@ -1,13 +1,21 @@
 var fs = require('fs');
 var path = require('path');
 var includes = require('array-includes');
+var debug = require('debug')('kc:resolve')
 
 module.exports = (root) =>  { 
+    debug(root);
+
     return {
         slides: () => {
             var folder = path.join(root, 'slides');
+            debug(folder)
+            
             if (fs.existsSync(folder))  {
-                return readTree(folder, '');
+                var items = readTree(folder, '');
+                
+                debug(items)
+                return items;
             }
 
             return [];

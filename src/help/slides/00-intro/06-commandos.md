@@ -1,6 +1,6 @@
 ## Commando's
 
 ```javascripts
-kc serve
+kc serve <options>
 kc help
 ```

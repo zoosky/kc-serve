@@ -18,4 +18,4 @@ Slide 2
 Slide 3
 
 ```
-<small>* seriously, doe liever een slide per bestand</small>
+<small>* seriously, liever een slide per bestand</small>
