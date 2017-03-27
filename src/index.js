@@ -24,8 +24,8 @@ program
 
     var data = { 
         title: path.basename(process.cwd()),
-        slides: r.slides(),
-        css: r.css(),
+        slides: () => r.slides(),
+        css: () => r.css(),
         server: {}
     };
 
