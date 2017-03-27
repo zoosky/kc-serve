@@ -3,7 +3,7 @@ var app = express();
 var path = require('path');
 var resolver = require('./resolver')
 
-module.exports = (template, data, options) => {
+module.exports = (template, data, options, cb) => {
     app.get('/', (req, res) => {
         res.status(200).send(template(data));
     });
@@ -21,8 +21,9 @@ module.exports = (template, data, options) => {
     app.use('/slides', express.static(path.join(options.cwd, 'slides')));
 
     var server = app.listen(options.port, function () {
-        var port = server.address().port;
-        console.log('Presentation available at: http://localhost:%s', options.port);
+        if (cb) {
+            cb(`http://localhost:${server.address().port}/`);
+        }
     });
 
     return server;

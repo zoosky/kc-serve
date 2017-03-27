@@ -3,7 +3,8 @@
 var request = require('supertest');
 var should = require('should');
 var path = require('path');
-var debug = require('debug')('test');
+var sinon = require('sinon')
+var http = require('http')
 
 describe('loading express', () => {
     var server;
@@ -12,7 +13,11 @@ describe('loading express', () => {
         delete require.cache[require.resolve('../src/server')];
 
         var cwd = path.join(__dirname, 'test_data');
-        server = require('../src/server')((data) => "# demo", { title: 'test', server: {} }, { cwd: cwd, port: 8384 });
+        server = require('../src/server')(
+            (data) => "# demo", 
+            { title: 'test', server: {} },
+            { cwd: cwd, port: 8384 }
+        );
     });
     
     afterEach((done) => {
@@ -22,7 +27,6 @@ describe('loading express', () => {
     it('serves template to /', (done) => {
         request(server)
             .get('/')
-            .expect(res => debug(res))
             .expect(res => res.text.should.match(/# demo/m))
             .expect(200, done);
     });
@@ -30,7 +34,6 @@ describe('loading express', () => {
     it ('serves reveal files to /reveal', done => {
         request(server)
             .get('/reveal/css/reveal.css')
-            .expect(res => debug(res))
             .expect(res => res.text.should.match(/html, body, .reveal div/m))
             .expect(200, done);
     });
@@ -38,7 +41,6 @@ describe('loading express', () => {
     it ('serves highlight files to /highlight', done => {
         request(server)
             .get('/css/highlight/vs.css')
-            .expect(res => debug(res))
             .expect(res => res.text.should.match(/Visual Studio-like style based on original C# coloring by Jason Diamond <jason@diamond.name>/m))
             .expect(200, done);
     });
@@ -46,7 +48,6 @@ describe('loading express', () => {
     it ('serves theme files to /theme', done => {
         request(server)
             .get('/theme/infosupport.css')
-            .expect(res => debug(res))
             .expect(res => res.text.should.match(/Info Support theme for reveal.js presentations/m))
             .expect(200, done);
     });
@@ -75,4 +76,30 @@ describe('loading express', () => {
             .get('/foo/bar')
             .expect(404, done);
     });
+});
+
+describe('initializing server', () => {
+    it ('should invokes callback on serve', (done) => {
+        var cb = sinon.stub();
+
+        server = require('../src/server')(
+            (data) => "# demo", 
+            { title: 'test', server: {} },
+            { cwd: '.', port: 8385 },
+            cb);
+
+        request(server)
+            .get('/')
+            .end((err, res) => {
+                server.close();
+
+                if (err) {
+                    return done(err)
+                }
+
+                cb.calledWithExactly('http://localhost:8385/').should.true()
+                done();
+            })
+        
+    })
 });
