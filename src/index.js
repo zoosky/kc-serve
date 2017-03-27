@@ -4,24 +4,26 @@
  * Module dependencies.
  */
 var program = require('commander');
-const spawn = require('cross-spawn');
 var server = require('./server')
+var print = require('./print')
 var template = require('./template')
 var resolver = require('./resolver')
 var path = require('path')
 var opn = require('opn')
+var debug = require('debug')('kc:index')
 
 program
-    .version('2.0.0')
+    .version(require('../package.json').version)
 
 program
-  .command('serve')
+  .command('serve [dir]')
   .description('serve presentation')
   .option('-p, --port <port>', 'serve presentation on specified port')
-  .option('-d, --dir <directory>', 'serve from presentation directory')
   .option('-o, --open', 'open presentation in a browser')
-  .action((cmd, options) => {
-    var cwd = cmd.dir || path.join(process.cwd())
+  .action((dir, options) => {
+    debug('dir: ', dir)
+    debug('options: ', options)
+    var cwd = dir || path.join(process.cwd())
     var r = resolver(cwd);
 
     var data = { 
@@ -31,7 +33,40 @@ program
         server: {}
     };
 
-    server(template(), data, { cwd: cwd, port: cmd.port || 3000 }, url => open(cmd.open, url));
+    server(
+      template(), 
+      data, 
+      {
+        cwd: cwd, 
+        port: 
+        options.port || 3000 
+      }, 
+      url => open(options.open, url)
+    );
+  })
+
+program
+  .command('print [dir]')
+  .description('print presentation')
+  .action(dir => {
+    var cwd = dir || process.cwd();
+    var r = resolver(cwd);
+
+    var data = { 
+        title: path.basename(process.cwd()),
+        slides: () => r.slides(),
+        css: () => r.css(),
+        server: {}
+    };
+
+    print(
+        data,
+        { 
+          cwd: cwd, 
+          port: 2999 
+        }, 
+        () => console.log('Done.')
+      );
   })
 
 program
@@ -45,7 +80,14 @@ program
         server: {}
       };
 
-      server(template(), data, { cwd: cwd, port: 3001, open: true }, url => open(true, url))
+      server(
+        template(),
+        data,
+        {
+          cwd: cwd,
+          port: 3001
+        },
+        url => open(true, url))
 });
 
 program.parse(process.argv);
