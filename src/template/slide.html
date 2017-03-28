@@ -2,6 +2,6 @@
                   <section><img src="/slides/{{path}}" class="stretch" /></section>
                   {{/isImage}}
 
-                  {{^isImage}}
+                  {{#isMarkdown}}
                   <section data-markdown="{{mount}}/{{slide.path}}" data-separator="^---$"  data-separator-vertical="^--$"></section>
-                  {{/isImage}}
+                  {{/isMarkdown}}

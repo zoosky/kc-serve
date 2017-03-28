@@ -1,5 +1,6 @@
 var should = require('should');
 var template = require('../src/template');
+var slideObject = require('../src/slideObject')
 
 describe('template', () => {
     it('should render', () => {
@@ -11,7 +12,7 @@ describe('template', () => {
 
     it ('should list a slide', () => {
         var data = { 
-            slides: () => [ { path: '00-intro.md' }],
+            slides: () => [ slideObject('00-intro.md') ],
             title: 'test',
             server: {
                 slides: '/slides'
@@ -23,7 +24,7 @@ describe('template', () => {
 
     it ('should not nest a root-level slide', () => {
         var data = { 
-            slides: () => [ { path: '00-intro.md' }],
+            slides: () => [ slideObject('00-intro.md') ],
             title: 'test',
             server: {
                 slides: '/slides'
@@ -36,7 +37,7 @@ describe('template', () => {
 
     it ('should nest vertical slides', () => {
         var data = { 
-            slides: () => [ [ { path: '00-intro.md' } ] ],
+            slides: () => [ [ slideObject('00-intro.md') ] ],
             title: 'test',
             server: {
                 slides: '/slides'
@@ -44,6 +45,19 @@ describe('template', () => {
         };
 
         template()(data).should.match(/<section>[\n\r\s]*<section data-markdown="\/slides\/00-intro.md"/m);
+    })
+
+
+    it ('should not list a html slide yet', () => {
+        var data = { 
+            slides: () => [ slideObject('00-intro.html') ],
+            title: 'test',
+            server: {
+                slides: '/slides'
+            }
+        };
+
+        template()(data).should.not.match(/<section data="\/slides\/00-intro.html"/m);
     })
 
     it ('should include custom css', () => {
@@ -75,7 +89,7 @@ describe('template', () => {
     it ('should use the specified mount point for slides', () => {
         var data = {
             title: 'test',
-            slides: () => [ { path: '00-intro.md' }],
+            slides: () => [ slideObject('00-intro.md') ],
             server: {
                 slides: '/server_defined_mountpoint'
             }

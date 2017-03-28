@@ -1,7 +1,7 @@
 var fs = require('fs');
 var path = require('path');
-var includes = require('array-includes');
 var debug = require('debug')('kc:resolve')
+var slideObject = require('./slideObject')
 
 module.exports = (root) =>  { 
     debug(root);
@@ -32,24 +32,13 @@ module.exports = (root) =>  {
     }
 }
 
-module.exports.reveal = () => path.resolve(require.resolve('reveal.js'), '..', '..');
-module.exports.highlight = () => path.resolve(require.resolve('highlight.js'), '..', '..');
-
 function readTree(root, dir) {
    return fs
     .readdirSync(path.join(root, dir))
     .map(m => path.join(dir, m))
-    .map(m => fs.lstatSync(path.join(root, m)).isDirectory() ? readTree(root, m) : filter(m))
-    .filter(m => m)
+    .map(m => fs.lstatSync(path.join(root, m)).isDirectory() ? readTree(root, m) : slideObject(m))
+    .filter(m => Array.isArray(m) || m.isImage || m.isMarkdown || m.isHtml)
 }
 
-function filter(file) {
-    if ((b = isImage(file)) || includes(['.md'], path.extname(file))) {
-        return { path: file, isImage: b };
-    }
-}
-
-function isImage(file) {
-    return includes(['.png', '.gif', '.jpg', '.jpeg', '.svg'], path.extname(file));
-}
-module.exports.isImage = isImage;
+module.exports.reveal = () => path.resolve(require.resolve('reveal.js'), '..', '..');
+module.exports.highlight = () => path.resolve(require.resolve('highlight.js'), '..', '..');
