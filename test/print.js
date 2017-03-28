@@ -15,6 +15,6 @@ describe('print', () => {
         };
 
         print(data, { cwd: cwd, port: 3002 }, done)
-    })
+    }).timeout(5000);
 })
 
