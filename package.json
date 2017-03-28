@@ -18,11 +18,16 @@
     "mocha": "^3.2.0",
     "should": "^11.2.1",
     "sinon": "^2.1.0",
+    "stryker": "^0.5.9",
+    "stryker-api": "^0.4.2",
+    "stryker-html-reporter": "^0.3.0",
+    "stryker-mocha-runner": "^0.2.0",
     "supertest": "^3.0.0"
   },
   "peerDependencies": {},
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "stryker": "stryker run stryker.conf.js"
   },
   "repository": {
     "type": "git",
