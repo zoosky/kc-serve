@@ -24,7 +24,7 @@
         <div class="reveal">
             <div class="slides">
             {{#each slides}}
-              {{#unless path}}
+              {{#unless file}}
               <section>
                 {{#each this}}
                   {{> slide slide=. mount=@root.server.slides}}
@@ -32,7 +32,7 @@
               </section>
               {{/unless}}
 
-              {{#if path}}
+              {{#if file}}
                   {{> slide slide=. mount=@root.server.slides}}
               {{/if}}
             {{/each}}
