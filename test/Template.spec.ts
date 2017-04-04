@@ -7,8 +7,7 @@ describe('Template', () => {
         const data = {
             title: 'test',
             slides: [],
-            css: [],
-            server: {}
+            css: []
         };
         expect(new Template(data).compile()).to.match(/<div class="reveal"/m);
     });
@@ -17,10 +16,7 @@ describe('Template', () => {
         const data = {
             slides: [new SlideObject('00-intro.md')],
             css: [],
-            title: 'test',
-            server: {
-                slides: '/slides'
-            }
+            title: 'test'
         };
 
         expect(new Template(data).compile()).to.match(/<section data-markdown="\/slides\/00-intro.md"/m);
@@ -30,10 +26,7 @@ describe('Template', () => {
         const data = {
             slides: [new SlideObject('00-intro.md')],
             title: 'test',
-            css: [],
-            server: {
-                slides: '/slides'
-            }
+            css: []
         };
 
         expect(new Template(data).compile).to.not.match(/<section>[\n\r\s]*<section data-markdown="\/slides\/00-intro.md"/m);
@@ -43,10 +36,7 @@ describe('Template', () => {
         const data = {
             slides: [[new SlideObject('00-intro.md')]],
             css: [],
-            title: 'test',
-            server: {
-                slides: '/slides'
-            }
+            title: 'test'
         };
         expect(new Template(data).compile()).to.match(/<section>[\n\r\s]*<section data-markdown="\/slides\/00-intro.md"/m);
     });
@@ -56,10 +46,7 @@ describe('Template', () => {
         const data = {
             slides: [new SlideObject('00-intro.html')],
             css: [],
-            title: 'test',
-            server: {
-                slides: '/slides'
-            }
+            title: 'test'
         };
 
         expect(new Template(data).compile()).to.not.match(/00-intro.html/m);
@@ -69,8 +56,7 @@ describe('Template', () => {
         const data = {
             title: 'test',
             slides: [],
-            css: ['custom.css'],
-            server: {}
+            css: ['custom.css']
         };
 
         expect(new Template(data).compile()).to.match(/<link rel="stylesheet" href=\/css\/custom.css>/m);
@@ -80,8 +66,7 @@ describe('Template', () => {
         const data = {
             title: 'test',
             slides: [],
-            css: [],
-            server: {}
+            css: []
         };
 
         expect(new Template(data).compile()).to.match(/<link rel="stylesheet" href="\/css\/highlight\/vs.css">/m);
@@ -92,23 +77,10 @@ describe('Template', () => {
             title: 'test',
             slides: [],
             css: [],
-            server: {},
             highlightTheme: 'zenburn'
         };
 
         expect(new Template(data).compile()).to.match(/<link rel="stylesheet" href="\/css\/highlight\/zenburn.css">/m);
     });
 
-    it('should use the specified mount point for slides', () => {
-        const data = {
-            title: 'test',
-            slides: [new SlideObject('00-intro.md')],
-            css: [],
-            server: {
-                slides: '/server_defined_mountpoint'
-            }
-        };
-
-        expect(new Template(data).compile()).to.match(/<section data-markdown="\/server_defined_mountpoint\/00-intro.md/m);
-    });
 });
