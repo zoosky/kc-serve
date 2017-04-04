@@ -4,16 +4,14 @@ import { SlideObject } from './../src/SlideObject';
 import { TemplateData } from './../src/TemplateData';
 import { Printer } from '../src/Printer';
 
-describe('Printer', () => {
+describe('Printer', function () {
 
-    beforeEach(function(){
-        this.timeout(5000);
-    });
+    this.timeout(10000);
 
-    it ('should output an pdf', () => {
+    it('should output an pdf', () => {
         var cwd = path.join(__dirname, 'test_data');
 
-        var data: TemplateData = { 
+        var data: TemplateData = {
             title: 'print',
             slides: [],
             css: []
