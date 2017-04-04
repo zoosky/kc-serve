@@ -4,6 +4,5 @@ export interface TemplateData {
     title: string;
     slides: (SlideObject | SlideObject[])[],
     css: string[],
-    server: {},
     highlightTheme?: string;
 }

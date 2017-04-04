@@ -27,8 +27,7 @@ program
     var data: TemplateData = {
       title: path.basename(process.cwd()),
       slides: await r.slides(),
-      css: r.css(),
-      server: {}
+      css: r.css()
     };
 
     const url = await new Server(
@@ -51,8 +50,7 @@ program
     var data: TemplateData = {
       title: path.basename(process.cwd()),
       slides: await r.slides(),
-      css: r.css(),
-      server: {}
+      css: r.css()
     };
 
     await new Printer(
@@ -72,7 +70,6 @@ program
     var data: TemplateData = {
       title: 'kc - help',
       slides: await new Resolver(cwd).slides(),
-      server: {},
       css: []
     };
 

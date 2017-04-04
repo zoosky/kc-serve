@@ -16,9 +16,7 @@ describe('Printer', () => {
         var data: TemplateData = { 
             title: 'print',
             slides: [],
-            css: [],
-            server: {
-            }
+            css: []
         };
         return new Printer(data, { cwd: cwd, port: 3002 }).print();
     });

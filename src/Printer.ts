@@ -1,6 +1,5 @@
 import * as path from 'path';
 import * as spawn from 'cross-spawn';
-import * as template from './Template';
 import { Server } from './Server';
 import { TemplateData } from './TemplateData';
 import { Options } from './Options';

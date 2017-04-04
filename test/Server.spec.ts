@@ -15,7 +15,7 @@ describe('Server', () => {
             delete require.cache[require.resolve('../src/Server')];
 
             var cwd = path.join(__dirname, 'test_data');
-            server = new Server({ title: 'test', slides: [], css: [], server: {} },
+            server = new Server({ title: 'test', slides: [], css: [] },
                 { cwd: cwd, port: 8384 });
             return server.listen();
         });
@@ -83,7 +83,7 @@ describe('Server', () => {
 
     describe('initializing server', () => {
         it('should resolve the promise ', async () => {
-            const server = new Server({ title: 'test', server: {}, slides: [], css: [] },
+            const server = new Server({ title: 'test', slides: [], css: [] },
                 { cwd: '.', port: 8385 });
             const address = await server.listen();
             expect(address).to.be.eq('http://localhost:8385/');
