@@ -62,6 +62,6 @@
   "author": "Manuel Riezebosch",
   "license": "ISC",
   "bin": {
-    "kc": "src/index.js"
+    "kc": "bin/kc"
   }
 }
