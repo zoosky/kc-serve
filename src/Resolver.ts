@@ -17,8 +17,7 @@ export class Resolver {
 
     slides() {
         if (fs.existsSync(this.slidesDirectory)) {
-            const items = this.readTree();
-            return items;
+            return this.readTree();
         }
     };
 
@@ -32,10 +31,11 @@ export class Resolver {
     }
 
     async readTree(): Promise<(SlideObject | SlideObject[])[]> {
-        return (await Promise.all((await fs.readdir(this.slidesDirectory))
+        return (await Promise.all((await fs.readdir(this.slidesDirectory)).sort()
             .map(async file => {
                 if ((await fs.stat(path.join(this.slidesDirectory, file))).isDirectory()) {
                     return (await this.listSlideFiles(file))
+                        .sort()
                         .map(file => new SlideObject(file))
                         .filter(Resolver.isSlide);
                 } else {
@@ -63,7 +63,7 @@ export class Resolver {
             } else {
                 return [file];
             }
-        })), paths => paths);
+        })), paths => paths).sort();
     }
 
 

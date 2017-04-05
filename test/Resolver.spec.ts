@@ -10,11 +10,12 @@ describe('Resolver', () => {
 
         it('should iterate folders and files', async () => {
             const slides = await new Resolver(path.join(__dirname, 'test_data')).slides();
-            expect(slides).to.deep.eq([ 
+            expect(slides).to.deep.eq([
                 new SlideObject('00-intro.md'),
                 [
                     new SlideObject(path.join('01-sub', '00-title.md')),
-                    new SlideObject(path.join('01-sub', '01-item.png'))
+                    new SlideObject(path.join('01-sub', '01-sub-folder', '01-sub-item.md')),
+                    new SlideObject(path.join('01-sub', '02-item.png'))
                 ]
             ]);
         });
