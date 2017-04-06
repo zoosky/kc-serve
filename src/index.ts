@@ -1,4 +1,3 @@
-import * as debugFn from 'debug';
 import * as opn from 'opn';
 import * as path from 'path';
 import * as program from 'commander';
@@ -6,8 +5,14 @@ import { Server } from './Server';
 import { Printer } from './Printer';
 import { Resolver } from './Resolver';
 import { TemplateData } from './TemplateData';
+import * as debugFn from 'debug';
 
 const debug = debugFn('kc:index');
+
+interface CliOptions {
+  port: number,
+  open: boolean;
+}
 
 program
   .version(require('../package.json').version)
@@ -18,7 +23,7 @@ program
   .description('serve presentation')
   .option('-p, --port <port>', 'serve presentation on specified port')
   .option('-o, --open', 'open presentation in a browser')
-  .action(async (dir, options) => {
+  .action(async (dir: string, options: CliOptions) => {
     debug('dir: ', dir)
     debug('options: ', options)
     var cwd = dir || path.join(process.cwd())
@@ -43,7 +48,7 @@ program
 program
   .command('print [dir]')
   .description('print presentation')
-  .action(async dir => {
+  .action(async (dir: string) => {
     var cwd = dir || process.cwd();
     var r = new Resolver(cwd);
 
@@ -65,7 +70,7 @@ program
 program
   .command('help')
   .description('view presentation on how to create slick presentations')
-  .action(async (cmd, options) => {
+  .action(async () => {
     var cwd = path.join(__dirname, 'help');
     var data: TemplateData = {
       title: 'kc - help',
@@ -84,7 +89,7 @@ program
 
 program.parse(process.argv);
 
-function open(open, url) {
+function open(open: boolean, url: string) {
   console.log(`Presentation: ${url}`)
   if (open) {
     opn(url);

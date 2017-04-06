@@ -1,7 +1,7 @@
 import * as path from 'path';
-import * as debugFn from 'debug';
 import * as _ from 'lodash';
 import * as fs from 'mz/fs';
+import * as debugFn from 'debug';
 import { SlideObject } from './SlideObject';
 
 const debug = debugFn('kc:Resolver');
@@ -18,6 +18,8 @@ export class Resolver {
     slides() {
         if (fs.existsSync(this.slidesDirectory)) {
             return this.readTree();
+        } else {
+            return [];
         }
     };
 
@@ -25,9 +27,9 @@ export class Resolver {
         var folder = path.join(this.root, 'css');
         if (fs.existsSync(folder)) {
             return fs.readdirSync(folder);
+        } else {
+            return [];
         }
-
-        return [];
     }
 
     async readTree(): Promise<(SlideObject | SlideObject[])[]> {

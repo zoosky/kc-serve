@@ -1,6 +1,5 @@
 import 'should';
 import * as path from 'path';
-import { SlideObject } from './../src/SlideObject';
 import { TemplateData } from './../src/TemplateData';
 import { Printer } from '../src/Printer';
 

@@ -1,8 +1,6 @@
 import * as request from 'supertest';
-import * as should from 'should';
+import 'should';
 import * as path from 'path';
-import * as sinon from 'sinon';
-import * as http from 'http';
 import { Server } from '../src/Server';
 import { expect } from 'chai';
 
@@ -27,7 +25,7 @@ describe('Server', () => {
         it('serves template to /', (done) => {
             request(server.server)
                 .get('/')
-                .expect(res => {
+                .expect( (res: request.Response) => {
                     res.text.should.match(/Reveal\.initialize\(options\)/mgi);
                     res.text.should.match(/\<title\>test\<\/title\>/mgi);
                 })
@@ -37,28 +35,28 @@ describe('Server', () => {
         it('serves reveal files to /reveal', done => {
             request(server.server)
                 .get('/reveal/css/reveal.css')
-                .expect(res => res.text.should.match(/html, body, .reveal div/m))
+                .expect((res: request.Response) => res.text.should.match(/html, body, .reveal div/m))
                 .expect(200, done);
         });
 
         it('serves highlight files to /highlight', done => {
             request(server.server)
                 .get('/css/highlight/vs.css')
-                .expect(res => res.text.should.match(/Visual Studio-like style based on original C# coloring by Jason Diamond <jason@diamond.name>/m))
+                .expect((res: request.Response) => res.text.should.match(/Visual Studio-like style based on original C# coloring by Jason Diamond <jason@diamond.name>/m))
                 .expect(200, done);
         });
 
         it('serves theme files to /theme', done => {
             request(server.server)
                 .get('/theme/infosupport.css')
-                .expect(res => res.text.should.match(/Info Support theme for reveal.js presentations/m))
+                .expect((res: request.Response) => res.text.should.match(/Info Support theme for reveal.js presentations/m))
                 .expect(200, done);
         });
 
         it('serves slides to /slides', done => {
             request(server.server)
                 .get('/slides/00-intro.md')
-                .expect(res => res.text.should.match(/# title/m))
+                .expect((res: request.Response) => res.text.should.match(/# title/m))
                 .expect(200, done);
         })
 

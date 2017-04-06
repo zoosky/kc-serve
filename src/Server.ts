@@ -11,9 +11,9 @@ export class Server {
     public server: http.Server;
     private app: express.Express;
 
-    constructor(private data: TemplateData, private options: Options) {
+    constructor(data: TemplateData, private options: Options) {
         this.app = express();
-        this.app.get('/', (req, res) => {
+        this.app.get('/', (_, res) => {
             res.status(200).send(new Template(data).compile());
         });
 
@@ -29,7 +29,7 @@ export class Server {
 
     listen() {
         return new Promise<string>((resolve, reject) => {
-            this.server = this.app.listen(this.options.port, (err) => {
+            this.server = this.app.listen(this.options.port, (err: any) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -41,7 +41,7 @@ export class Server {
 
     close() {
         return new Promise<void>((resolve, reject) => {
-            this.server.close(error => {
+            this.server.close((error: any) => {
                 if (error) {
                     reject(error);
                 } else {
