@@ -73,3 +73,8 @@ typings/
 
 *.pdf
 reports/
+
+# TypeScript
+test/*.js
+src/*.js
+*.map
