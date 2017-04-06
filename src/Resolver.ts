@@ -1,7 +1,7 @@
 import * as path from 'path';
-import * as debugFn from 'debug';
 import * as _ from 'lodash';
 import * as fs from 'mz/fs';
+import * as debugFn from 'debug';
 import { SlideObject } from './SlideObject';
 
 const debug = debugFn('kc:Resolver');
@@ -12,22 +12,24 @@ export class Resolver {
 
     constructor(private root: string) {
         debug(root);
-        this.slidesDirectory = path.join(root, 'slides')
+        this.slidesDirectory = path.join(root, 'slides');
     }
 
     slides() {
         if (fs.existsSync(this.slidesDirectory)) {
             return this.readTree();
+        } else {
+            return [];
         }
-    };
+    }
 
     css() {
-        var folder = path.join(this.root, 'css');
+        const folder = path.join(this.root, 'css');
         if (fs.existsSync(folder)) {
             return fs.readdirSync(folder);
+        } else {
+            return [];
         }
-
-        return [];
     }
 
     async readTree(): Promise<(SlideObject | SlideObject[])[]> {
@@ -68,9 +70,9 @@ export class Resolver {
 
 
     static reveal() {
-        return path.resolve(require.resolve('reveal.js'), '..', '..')
+        return path.resolve(require.resolve('reveal.js'), '..', '..');
     }
     static highlight() {
-        return path.resolve(require.resolve('highlight.js'), '..', '..')
+        return path.resolve(require.resolve('highlight.js'), '..', '..');
     }
 }

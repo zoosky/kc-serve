@@ -1,4 +1,3 @@
-import * as debugFn from 'debug';
 import * as opn from 'opn';
 import * as path from 'path';
 import * as program from 'commander';
@@ -6,11 +5,17 @@ import { Server } from './Server';
 import { Printer } from './Printer';
 import { Resolver } from './Resolver';
 import { TemplateData } from './TemplateData';
+import * as debugFn from 'debug';
 
 const debug = debugFn('kc:index');
 
+interface CliOptions {
+  port: number;
+  open: boolean;
+}
+
 program
-  .version(require('../package.json').version)
+  .version(require('../package.json').version);
 
 
 program
@@ -18,16 +23,16 @@ program
   .description('serve presentation')
   .option('-p, --port <port>', 'serve presentation on specified port')
   .option('-o, --open', 'open presentation in a browser')
-  .action(async (dir, options) => {
-    debug('dir: ', dir)
-    debug('options: ', options)
-    var cwd = dir || path.join(process.cwd())
-    var r = new Resolver(cwd);
+  .action(async (dir: string, options: CliOptions) => {
+    debug('dir: ', dir);
+    debug('options: ', options);
+    const cwd = dir || path.join(process.cwd());
+    const resolver = new Resolver(cwd);
 
-    var data: TemplateData = {
+    const data: TemplateData = {
       title: path.basename(process.cwd()),
-      slides: await r.slides(),
-      css: r.css()
+      slides: await resolver.slides(),
+      css: resolver.css()
     };
 
     const url = await new Server(
@@ -43,11 +48,11 @@ program
 program
   .command('print [dir]')
   .description('print presentation')
-  .action(async dir => {
-    var cwd = dir || process.cwd();
-    var r = new Resolver(cwd);
+  .action(async (dir: string) => {
+    const cwd = dir || process.cwd();
+    const r = new Resolver(cwd);
 
-    var data: TemplateData = {
+    const data: TemplateData = {
       title: path.basename(process.cwd()),
       slides: await r.slides(),
       css: r.css()
@@ -59,15 +64,15 @@ program
         port: 2999
       }
     ).print();
-    console.log('Done.')
+    console.log('Done.');
   });
 
 program
   .command('help')
   .description('view presentation on how to create slick presentations')
-  .action(async (cmd, options) => {
-    var cwd = path.join(__dirname, 'help');
-    var data: TemplateData = {
+  .action(async () => {
+    const cwd = path.join(__dirname, 'help');
+    const data: TemplateData = {
       title: 'kc - help',
       slides: await new Resolver(cwd).slides(),
       css: []
@@ -79,13 +84,13 @@ program
         cwd: cwd,
         port: 3001
       }).listen();
-    open(true, url)
+    open(true, url);
   });
 
 program.parse(process.argv);
 
-function open(open, url) {
-  console.log(`Presentation: ${url}`)
+function open(open: boolean, url: string) {
+  console.log(`Presentation: ${url}`);
   if (open) {
     opn(url);
   }

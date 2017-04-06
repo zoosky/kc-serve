@@ -1,9 +1,9 @@
 import * as path from 'path';
-import * as spawn from 'cross-spawn';
 import { Server } from './Server';
 import { TemplateData } from './TemplateData';
 import { Options } from './Options';
 import { Resolver } from './Resolver';
+const spawn = require('cross-spawn');
 
 export class Printer {
 
@@ -11,13 +11,13 @@ export class Printer {
     }
 
     async print() {
-        var server = new Server(this.data, this.options);
+        const server = new Server(this.data, this.options);
         const url = await server.listen();
-        var plugin = path.join(Resolver.reveal(), 'plugin', 'print-pdf', 'print-pdf.js')
-        var cp = spawn('phantomjs', [plugin, `${url}?print-pdf`, 'slides.pdf']);
+        const plugin = path.join(Resolver.reveal(), 'plugin', 'print-pdf', 'print-pdf.js');
+        const cp = spawn('phantomjs', [plugin, `${url}?print-pdf`, 'slides.pdf']);
 
-        return new Promise<void>((resolve, reject) => {
-            cp.stdout.on('data', async (data) => {
+        return new Promise<void>(resolve => {
+            cp.stdout.on('data', async (data: Buffer | string) => {
                 if (data.toString().match(/Export PDF: Finished successfully!/g)) {
                     resolve();
                 }
