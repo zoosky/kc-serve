@@ -8,9 +8,9 @@ describe('Printer', function () {
     this.timeout(10000);
 
     it('should output an pdf', () => {
-        var cwd = path.join(__dirname, 'test_data');
+        const cwd = path.join(__dirname, 'test_data');
 
-        var data: TemplateData = {
+        const data: TemplateData = {
             title: 'print',
             slides: [],
             css: []

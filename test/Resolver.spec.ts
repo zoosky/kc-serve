@@ -28,7 +28,7 @@ describe('Resolver', () => {
 
     describe('css', () => {
         it('should list css-files in the /css directory', () => {
-            var dir = path.join(__dirname, 'test_data');
+            const dir = path.join(__dirname, 'test_data');
             expect(new Resolver(dir).css()).to.deep.eq(['demo.css']);
         });
 
@@ -39,13 +39,13 @@ describe('Resolver', () => {
 
     describe('reveal', () => {
         it('should resolve the package location of reveal.js', () => {
-            Resolver.reveal().should.match(/[\\/]kc-cli[\\/]node_modules[\\/]reveal.js$/g)
+            Resolver.reveal().should.match(/[\\/]kc-cli[\\/]node_modules[\\/]reveal.js$/g);
         });
     });
 
     describe('highlight', () => {
         it('should resolve the package location of highlight.js', () => {
-            Resolver.highlight().should.match(/[\\/]kc-cli[\\/]node_modules[\\/]highlight.js$/g)
+            Resolver.highlight().should.match(/[\\/]kc-cli[\\/]node_modules[\\/]highlight.js$/g);
         });
     });
 });

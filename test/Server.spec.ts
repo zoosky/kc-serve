@@ -12,7 +12,7 @@ describe('Server', () => {
         beforeEach(() => {
             delete require.cache[require.resolve('../src/Server')];
 
-            var cwd = path.join(__dirname, 'test_data');
+            const cwd = path.join(__dirname, 'test_data');
             server = new Server({ title: 'test', slides: [], css: [] },
                 { cwd: cwd, port: 8384 });
             return server.listen();
@@ -58,13 +58,13 @@ describe('Server', () => {
                 .get('/slides/00-intro.md')
                 .expect((res: request.Response) => res.text.should.match(/# title/m))
                 .expect(200, done);
-        })
+        });
 
         it('serves img to /img', done => {
             request(server.server)
                 .get('/img/plaatje.jpg')
                 .expect(200, done);
-        })
+        });
 
         it('serves css files to /css', done => {
             request(server.server)

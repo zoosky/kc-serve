@@ -12,7 +12,7 @@ export class Resolver {
 
     constructor(private root: string) {
         debug(root);
-        this.slidesDirectory = path.join(root, 'slides')
+        this.slidesDirectory = path.join(root, 'slides');
     }
 
     slides() {
@@ -21,10 +21,10 @@ export class Resolver {
         } else {
             return [];
         }
-    };
+    }
 
     css() {
-        var folder = path.join(this.root, 'css');
+        const folder = path.join(this.root, 'css');
         if (fs.existsSync(folder)) {
             return fs.readdirSync(folder);
         } else {
@@ -70,9 +70,9 @@ export class Resolver {
 
 
     static reveal() {
-        return path.resolve(require.resolve('reveal.js'), '..', '..')
+        return path.resolve(require.resolve('reveal.js'), '..', '..');
     }
     static highlight() {
-        return path.resolve(require.resolve('highlight.js'), '..', '..')
+        return path.resolve(require.resolve('highlight.js'), '..', '..');
     }
 }

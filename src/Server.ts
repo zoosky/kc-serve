@@ -20,7 +20,7 @@ export class Server {
         this.app.use('/reveal', express.static(Resolver.reveal()));
         this.app.use('/css/highlight', express.static(path.join(Resolver.highlight(), 'styles')));
 
-        var theme = path.join(__dirname, 'theme');
+        const theme = path.join(__dirname, 'theme');
         this.app.use('/theme', express.static(theme));
         this.app.use('/img', express.static(path.join(options.cwd, 'img')));
         this.app.use('/css', express.static(path.join(options.cwd, 'css')));
@@ -50,4 +50,4 @@ export class Server {
             });
         });
     }
-};
+}

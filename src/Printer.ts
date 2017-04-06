@@ -11,10 +11,10 @@ export class Printer {
     }
 
     async print() {
-        var server = new Server(this.data, this.options);
+        const server = new Server(this.data, this.options);
         const url = await server.listen();
-        var plugin = path.join(Resolver.reveal(), 'plugin', 'print-pdf', 'print-pdf.js')
-        var cp = spawn('phantomjs', [plugin, `${url}?print-pdf`, 'slides.pdf']);
+        const plugin = path.join(Resolver.reveal(), 'plugin', 'print-pdf', 'print-pdf.js');
+        const cp = spawn('phantomjs', [plugin, `${url}?print-pdf`, 'slides.pdf']);
 
         return new Promise<void>(resolve => {
             cp.stdout.on('data', async (data: Buffer | string) => {

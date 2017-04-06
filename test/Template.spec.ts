@@ -50,7 +50,7 @@ describe('Template', () => {
         };
 
         expect(new Template(data).compile()).to.not.match(/00-intro.html/m);
-    })
+    });
 
     it('should include custom css', () => {
         const data = {

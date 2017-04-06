@@ -38,12 +38,15 @@
     "stryker-html-reporter": "^0.3.0",
     "stryker-mocha-runner": "^0.2.0",
     "supertest": "^3.0.0",
+    "tslint": "^5.0.0",
     "typescript": "^2.2.2"
   },
   "peerDependencies": {},
   "scripts": {
+    "lint": "tslint -p .",
     "prebuild": "node clean.js",
     "build": "tsc -p .",
+    "postbuild": "npm run lint",
     "pretest": "npm run build",
     "test": "mocha",
     "stryker": "stryker run stryker.conf.js"
