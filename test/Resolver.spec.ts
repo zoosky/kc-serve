@@ -16,7 +16,12 @@ describe('Resolver', () => {
                     new Slide(path.join('01-sub', '00-title.md')),
                     new Slide(path.join('01-sub', '01-sub-folder', '01-sub-item.md')),
                     new Slide(path.join('01-sub', '02-item.png'))
-                ])
+                ]),
+                new SlideFolder('03-natural-sort', [
+                    new Slide(path.join('03-natural-sort', '1-first.md')),
+                    new Slide(path.join('03-natural-sort', '9-second.md')),
+                    new Slide(path.join('03-natural-sort', '12-last.md'))
+                 ])
             ]);
         });
 
