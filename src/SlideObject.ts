@@ -10,6 +10,5 @@ export class SlideObject {
         const extension = path.extname(file);
         this.isMarkdown = extension === '.md';
         this.isImage = ['.png', '.gif', '.jpg', '.jpeg', '.svg'].some(ext => ext === extension);
-        this.isHtml = extension === '.html';
     }
 }

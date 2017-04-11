@@ -15,11 +15,11 @@ export class Resolver {
         this.slidesDirectory = path.join(root, 'slides');
     }
 
-    slides() {
+    slides(): Promise<(SlideObject | SlideObject[])[]> {
         if (fs.existsSync(this.slidesDirectory)) {
             return this.readTree();
         } else {
-            return [];
+            return new Promise<SlideObject[]>((resolve, _reject) => resolve(new Array<SlideObject>()));
         }
     }
 

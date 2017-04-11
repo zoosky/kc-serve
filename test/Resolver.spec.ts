@@ -20,8 +20,8 @@ describe('Resolver', () => {
             ]);
         });
 
-        it('should not fail on no folder', () => {
-            new Resolver('asdfasdfasdf').slides();
+        it('should not fail on no folder', async () => {
+            expect(await new Resolver('asdfasdfasdf').slides()).to.deep.eq([]);
         });
     });
 
@@ -33,7 +33,7 @@ describe('Resolver', () => {
         });
 
         it('should not fail on no folder', () => {
-            new Resolver('asdfasdfasdf').css();
+            expect(new Resolver('asdfasdfasdf').css()).to.deep.eq([]);
         });
     });
 
