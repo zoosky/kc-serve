@@ -90,8 +90,12 @@ program
 program.parse(process.argv);
 
 function open(open: boolean, url: string) {
-  console.log(`Presentation: ${url}`);
+  console.log(`Presentation url: ${url}`);
   if (open) {
     opn(url);
+  } else {
+    console.log('  Hint: open the url in your default browser with \x1b[1mkc serve -o\x1b[0m!');
   }
+
+  console.log('Press \'\CTRL+C\' to stop the process.');
 }
