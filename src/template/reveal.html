@@ -24,15 +24,15 @@
         <div class="reveal">
             <div class="slides">
             {{#each slides}}
-              {{#unless file}}
+              {{#if isFolder}}
               <section>
-                {{#each this}}
+                {{#each slides}}
                   {{> slide slide=.}}
                 {{/each}}
               </section>
-              {{/unless}}
+              {{/if}}
 
-              {{#if file}}
+              {{#if isSlide}}
                   {{> slide slide=.}}
               {{/if}}
             {{/each}}
