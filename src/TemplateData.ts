@@ -2,7 +2,7 @@ import { SlideObject } from './SlideObject';
 
 export interface TemplateData {
     title: string;
-    slides: (SlideObject | SlideObject[])[];
+    slides: SlideObject[];
     css: string[];
     highlightTheme?: string;
 }

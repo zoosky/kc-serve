@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { Template } from '../src/Template';
-import { SlideObject } from '../src/SlideObject';
+import { Slide, SlideFolder } from '../src/SlideObject';
 
 describe('Template', () => {
     it('should render', () => {
@@ -14,7 +14,7 @@ describe('Template', () => {
 
     it('should list a slide', () => {
         const data = {
-            slides: [new SlideObject('00-intro.md')],
+            slides: [new Slide('00-intro.md')],
             css: [],
             title: 'test'
         };
@@ -24,7 +24,7 @@ describe('Template', () => {
 
     it('should not nest a root-level slide', () => {
         const data = {
-            slides: [new SlideObject('00-intro.md')],
+            slides: [new Slide('00-intro.md')],
             title: 'test',
             css: []
         };
@@ -34,7 +34,7 @@ describe('Template', () => {
 
     it('should nest vertical slides', () => {
         const data = {
-            slides: [[new SlideObject('00-intro.md')]],
+            slides: [new SlideFolder('01-folder', [new Slide('00-intro.md')])],
             css: [],
             title: 'test'
         };
@@ -44,7 +44,7 @@ describe('Template', () => {
 
     it('should not list a html slide yet', () => {
         const data = {
-            slides: [new SlideObject('00-intro.html')],
+            slides: [new Slide('00-intro.html')],
             css: [],
             title: 'test'
         };
