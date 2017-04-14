@@ -4,8 +4,8 @@ import * as program from 'commander';
 import { Server } from './Server';
 import { Printer } from './Printer';
 import { Resolver } from './Resolver';
-import { TemplateData } from './TemplateData';
 import * as debugFn from 'debug';
+import { Template } from './Template';
 
 const debug = debugFn('kc:index');
 
@@ -29,41 +29,26 @@ program
     const cwd = dir || path.join(process.cwd());
     const resolver = new Resolver(cwd);
 
-    const data: TemplateData = {
-      title: path.basename(process.cwd()),
-      slides: await resolver.slides(),
-      css: resolver.css()
-    };
-
     const url = await new Server(
-      data,
-      {
-        cwd: cwd,
-        port: options.port || 3000
-      },
+      new Template(path.basename(process.cwd())),
+      resolver,
+      options.port || 3000
     ).listen();
     open(options.open, url);
   });
 
 program
-  .command('print [dir]')
+  .command('print [file] [dir]')
   .description('print presentation')
-  .action(async (dir: string) => {
+  .action(async (file: string, dir: string) => {
     const cwd = dir || process.cwd();
-    const r = new Resolver(cwd);
-
-    const data: TemplateData = {
-      title: path.basename(process.cwd()),
-      slides: await r.slides(),
-      css: r.css()
-    };
+    const resolver = new Resolver(cwd);
 
     await new Printer(
-      data, {
-        cwd: cwd,
-        port: 2999
-      }
-    ).print();
+      new Template(path.basename(process.cwd())),
+      resolver, 
+      2999
+    ).print(file || 'slides.pdf');
     console.log('Done.');
   });
 
@@ -72,18 +57,10 @@ program
   .description('view presentation on how to create slick presentations')
   .action(async () => {
     const cwd = path.join(__dirname, 'help');
-    const data: TemplateData = {
-      title: 'kc - help',
-      slides: await new Resolver(cwd).slides(),
-      css: []
-    };
-
     const url = await new Server(
-      data,
-      {
-        cwd: cwd,
-        port: 3001
-      }).listen();
+      new Template('kc - help'),
+      new Resolver(cwd),
+      3001).listen();
     open(true, url);
   });
 
@@ -94,6 +71,7 @@ function open(open: boolean, url: string) {
   if (open) {
     opn(url);
   } else {
+    // Thanks to: https://coderwall.com/p/yphywg/printing-colorful-text-in-terminal-when-run-node-js-script
     console.log('  Hint: open the url in your default browser with \x1b[1mkc serve -o\x1b[0m!');
   }
 

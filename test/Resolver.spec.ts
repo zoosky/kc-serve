@@ -1,4 +1,3 @@
-import 'should';
 import * as path from 'path';
 import { Resolver } from '../src/Resolver';
 import { Slide, SlideFolder } from '../src/SlideObject';
@@ -21,7 +20,8 @@ describe('Resolver', () => {
                     new Slide(path.join('03-natural-sort', '1-first.md')),
                     new Slide(path.join('03-natural-sort', '9-second.md')),
                     new Slide(path.join('03-natural-sort', '12-last.md'))
-                 ])
+                 ]),
+                 new Slide('99-new.md')
             ]);
         });
 
@@ -34,25 +34,25 @@ describe('Resolver', () => {
 
 
     describe('css', () => {
-        it('should list css-files in the /css directory', () => {
+        it('should list css-files in the /css directory', async () => {
             const dir = path.join(__dirname, 'test_data');
-            expect(new Resolver(dir).css()).to.deep.eq(['demo.css']);
+            expect(await new Resolver(dir).css()).to.deep.eq(['demo.css']);
         });
 
-        it('should not fail on no folder', () => {
-            expect(new Resolver('asdfasdfasdf').css()).to.deep.eq([]);
+        it('should not fail on no folder', async () => {
+            expect(await new Resolver('asdfasdfasdf').css()).to.deep.eq([]);
         });
     });
 
     describe('reveal', () => {
         it('should resolve the package location of reveal.js', () => {
-            Resolver.reveal().should.match(/[\\/]kc-cli[\\/]node_modules[\\/]reveal.js$/g);
+            expect(new Resolver('.').reveal()).to.match(/[\\/]kc-cli[\\/]node_modules[\\/]reveal.js$/g);
         });
     });
 
     describe('highlight', () => {
         it('should resolve the package location of highlight.js', () => {
-            Resolver.highlight().should.match(/[\\/]kc-cli[\\/]node_modules[\\/]highlight.js$/g);
+            expect(new Resolver('.').highlight()).to.match(/[\\/]kc-cli[\\/]node_modules[\\/]highlight.js$/g);
         });
     });
 });
