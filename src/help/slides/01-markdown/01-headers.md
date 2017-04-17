@@ -1,9 +1,9 @@
 ```markdown
-# Titel1
-## Titel2
-### Titel3
+# Title 1
+## Title 2
+### Title 3
 ```
 
-# Titel1
-## Titel2
-### Titel3
+# Title 1
+## Title 2
+### Title 3

@@ -1,1 +1,0 @@
-Plaats custom-css in een `/css` folder

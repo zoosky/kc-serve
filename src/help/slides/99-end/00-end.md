@@ -1,4 +1,4 @@
 # That's it
 
-Je bent klaar.  Open Visual Studio Code.  
-Maak een `/slides` directory en voeg slides toe.
+You're done.  Open Visual Studio Code.  
+Create a `/slides` directory and add slides.

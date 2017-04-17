@@ -1,13 +1,13 @@
 ```markdown
-1. Punt 1
-    1. Sub2
-    1. Sub2
-1. Punt 2
-    * Sub
+1. Point 1
+    1. Sub 1
+    1. Sub 2
+1. Point 2
+    * Sub but not numbered
 ```
 
-1. Punt 1
-    1. Sub1
-    1. Sub2
-1. Punt 2
-    * Sub
+1. Point 1
+    1. Sub 1
+    1. Sub 2
+1. Point 2
+    * Sub but not numbered

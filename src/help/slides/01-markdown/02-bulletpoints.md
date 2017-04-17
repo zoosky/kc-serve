@@ -1,10 +1,10 @@
 ```markdown
-* Punt 1
-* Punt 2
-    * Sub
+* Poit 1
+* Point 2
+    * Sub point
 ```
 
-* Punt 1
-* Punt 2
-    * Sub
+* Point 1
+* Point 2
+    * Sub point
 

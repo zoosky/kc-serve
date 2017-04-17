@@ -22,7 +22,7 @@ program
   .command('serve [dir]')
   .description('serve presentation')
   .option('-p, --port <port>', 'serve presentation on specified port')
-  .option('-o, --open', 'open presentation in a browser')
+  .option('-o, --open', 'open presentation in the browser')
   .action(async (dir: string, options: CliOptions) => {
     debug('dir: ', dir);
     debug('options: ', options);
