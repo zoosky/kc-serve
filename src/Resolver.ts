@@ -7,46 +7,52 @@ const walk = require('walkdir');
 const debug = debugFn('kc:Resolver');
 
 export class Resolver {
-
-    private slidesDirectory: string;
+    dirs = {
+        slides: () => path.join(this.root, 'slides'),
+        css: () => path.join(this.root, 'css'),
+        img: () => path.join(this.root, 'img')
+    };
 
     constructor(private root: string) {
         debug(root);
-        this.slidesDirectory = path.join(root, 'slides');
     }
 
-    slides(): Promise<SlideObject[]> {
-        if (fs.existsSync(this.slidesDirectory)) {
-            return this.readTree();
-        } else {
-            return Promise.resolve([]);
-        }
+    async slides(): Promise<SlideObject[]> {
+        return (await fs.exists(this.dirs.slides())) ?
+            Resolver.readTree(this.dirs.slides()) :
+            Promise.resolve([]);
     }
 
-    css() {
-        const folder = path.join(this.root, 'css');
-        if (fs.existsSync(folder)) {
-            return fs.readdirSync(folder);
-        } else {
-            return [];
-        }
+    async css(): Promise<string[]> {
+        return (await fs.exists(this.dirs.css())) ? 
+            fs.readdir(this.dirs.css()) :
+            Promise.resolve([]);
     }
     
-    private readTree(): Promise<SlideObject[]> {
+    private static readTree(dir: string): Promise<SlideObject[]> {
         return new Promise<SlideObject[]>((resolve, reject) => {
             let items = new Array<string>();
-            let emitter = walk(this.slidesDirectory);
+            let emitter = walk(dir);
 
-            emitter.on('file', (name: string, _stat: any) => items.push(path.relative(this.slidesDirectory, name)));
+            emitter.on('file', (name: string, _stat: any) => items.push(path.relative(dir, name)));
             emitter.on('end', () => resolve(SlideConvert.from(items)));
             emitter.on('error', reject);
         });
     }
 
-    static reveal() {
+    reveal() {
         return path.resolve(require.resolve('reveal.js'), '..', '..');
     }
-    static highlight() {
+
+    highlight() {
         return path.resolve(require.resolve('highlight.js'), '..', '..');
+    }
+
+    highlightCss() {
+        return path.join(this.highlight(), 'styles');
+    }
+
+    theme() {
+        return path.join(__dirname, 'theme');
     }
 }

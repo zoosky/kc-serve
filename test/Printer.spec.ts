@@ -1,8 +1,9 @@
-import 'should';
+import { expect } from 'chai';
 import * as path from 'path';
-const fs = require('fs-extra');
-import { TemplateData } from './../src/TemplateData';
+import * as fs from 'mz/fs';
 import { Printer } from '../src/Printer';
+import { Resolver } from '../src/Resolver';
+import { Template } from '../src/Template';
 
 describe('Printer', function () {
 
@@ -10,15 +11,9 @@ describe('Printer', function () {
 
     it('should output an pdf', async () => {
         const cwd = path.join(__dirname, 'test_data');
-
-        const data: TemplateData = {
-            title: 'print',
-            slides: [],
-            css: []
-        };
         
-        await new Printer(data, { cwd: cwd, port: 3002 }).print();
-        fs.existsSync('slides.pdf').should.true();
+        await new Printer(new Template('print'), new Resolver(cwd), 3002).print('slides.pdf');
+        expect(await fs.exists('slides.pdf')).to.be.true;
     });
 });
 

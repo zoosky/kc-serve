@@ -3,11 +3,11 @@
     <head>
         <meta charset="utf-8">
         <title>{{{title}}}</title>
-        <link rel="stylesheet" href="/reveal/css/reveal.css">
-        <link rel="stylesheet" href="/theme/infosupport.css" id="theme">
-        <link rel="stylesheet" href="/css/highlight/{{{highlightTheme}}}.css">
+        <link rel="stylesheet" href="{{{dirs.reveal}}}/css/reveal.css">
+        <link rel="stylesheet" href="{{{dirs.theme}}}/infosupport.css" id="theme">
+        <link rel="stylesheet" href="{{{dirs.highlight}}}/{{{highlightTheme}}}.css">
         {{#css}}
-        <link rel="stylesheet" href=/css/{{{.}}}>
+        <link rel="stylesheet" href="{{{@root.dirs.css}}}/{{{.}}}">
         {{/css}}
 
         <!-- Printing and PDF exports -->
@@ -39,8 +39,8 @@
             </div>
         </div>
 
-        <script src="/reveal/lib/js/head.min.js"></script>
-        <script src="/reveal/js/reveal.js"></script>
+        <script src="{{{dirs.reveal}}}/lib/js/head.min.js"></script>
+        <script src="{{{dirs.reveal}}}/js/reveal.js"></script>
 
         <script>
             function extend() {
@@ -58,13 +58,13 @@
 
             // Optional libraries used to extend on reveal.js
             var deps = [
-              { src: '/reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-              { src: '/reveal/plugin/markdown/marked.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
-              { src: '/reveal/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
-              { src: '/reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-              { src: '/reveal/plugin/zoom-js/zoom.js', async: true },
-              { src: '/reveal/plugin/notes/notes.js', async: true },
-              { src: '/reveal/plugin/math/math.js', async: true }
+              { src: '{{{dirs.reveal}}}/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+              { src: '{{{dirs.reveal}}}/plugin/markdown/marked.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+              { src: '{{{dirs.reveal}}}/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+              { src: '{{{dirs.reveal}}}/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+              { src: '{{{dirs.reveal}}}/plugin/zoom-js/zoom.js', async: true },
+              { src: '{{{dirs.reveal}}}/plugin/notes/notes.js', async: true },
+              { src: '{{{dirs.reveal}}}/plugin/math/math.js', async: true }
             ];
 
             // default options to init reveal.js

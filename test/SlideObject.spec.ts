@@ -86,6 +86,40 @@ describe('SlideConvert', () => {
             ]);
         });
 
+        it ('sort slide objects in sub folders in natural order', () => {
+            let sub = '01-sub';
+            let slide1 = path.join(sub, '2-slide.md');
+            let slide2 = path.join(sub, '10-slide.md');
+
+            let items = [
+                slide2,
+                slide1
+            ];
+            expect(SlideConvert.from(items)).to.deep.eq([
+                new SlideFolder(sub, [
+                    new Slide(slide1),
+                    new Slide(slide2)
+                ])
+            ]);
+        });
+
+        it ('sort slide objects in natural order', () => {
+            let slide1 = '1-slide.md';
+            let slide2 = '2-slide.md';
+            let slide3 = '10-slide.md';
+
+            let items = [
+                slide1,
+                slide2,
+                slide3
+            ];
+            expect(SlideConvert.from(items)).to.deep.eq([
+                new Slide(slide1),
+                new Slide(slide2),
+                new Slide(slide3)
+            ]);
+        });
+
         it ('sort slide folders and slides in root folder', () => {
             let slide1 = '1-slide.md';
             let slide2 = path.join('2-sub', '1-slide.md');
@@ -100,6 +134,20 @@ describe('SlideConvert', () => {
                 new Slide(slide1),
                 new SlideFolder('2-sub', [ new Slide(slide2) ]),
                 new Slide(slide3)
+            ]);
+        });
+
+        it ('sort slide folders and slides in root folder in natural order', () => {
+            let slide1 = path.join('2-sub', '1-slide.md');
+            let slide2 = '10-slide.md';
+
+            let items = [
+                slide1,
+                slide2
+            ];
+            expect(SlideConvert.from(items)).to.deep.eq([
+                new SlideFolder('2-sub', [ new Slide(slide1) ]),
+                new Slide(slide2)
             ]);
         });
     });
