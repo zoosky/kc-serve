@@ -5,7 +5,7 @@ Inspired by [reveal-md](https://github.com/webpro/reveal-md).
 Just 3 simple steps:
 
 1. Open Visual Studio Code (or any other lightweight IDE)
-1. Start `kc-cli serve` from the (integrated) terminal
+1. Start `kc serve` from the (integrated) terminal
 1. Create a `./slides` folder and add markdown slides 
 
 Some tips:
