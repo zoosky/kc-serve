@@ -9,15 +9,15 @@ describe('Template', () => {
     });
 
     it('should list a slide', () => {
-        expect(new Template('test').compile([new Slide('00-intro.md')], [])).to.match(/<section data-markdown="\/slides\/00-intro.md"/m);
+        expect(new Template('test').compile([new Slide('00-intro.md')], [])).to.match(/<section data-markdown="slides\/00-intro.md"/m);
     });
 
     it('should not nest a root-level slide', () => {
-        expect(new Template('test').compile([new Slide('00-intro.md')], [])).to.not.match(/<section>[\n\r\s]*<section data-markdown="\/slides\/00-intro.md"/m);
+        expect(new Template('test').compile([new Slide('00-intro.md')], [])).to.not.match(/<section>[\n\r\s]*<section data-markdown="slides\/00-intro.md"/m);
     });
 
     it('should nest vertical slides', () => {
-        expect(new Template('test').compile([new SlideFolder('01-folder', [new Slide('00-intro.md')])], [])).to.match(/<section>[\n\r\s]*<section data-markdown="\/slides\/00-intro.md"/m);
+        expect(new Template('test').compile([new SlideFolder('01-folder', [new Slide('00-intro.md')])], [])).to.match(/<section>[\n\r\s]*<section data-markdown="slides\/00-intro.md"/m);
     });
 
     it('should not list a html slide yet', () => {
@@ -25,15 +25,15 @@ describe('Template', () => {
     });
 
     it('should include custom css', () => {
-        expect(new Template('test').compile([], ['custom.css'])).to.match(/<link rel="stylesheet" href="\/css\/custom.css">/m);
+        expect(new Template('test').compile([], ['custom.css'])).to.match(/<link rel="stylesheet" href="css\/custom.css">/m);
     });
 
     it('should include default vs highlight theme', () => {
-        expect(new Template('test').compile([], [])).to.match(/<link rel="stylesheet" href="\/css\/highlight\/vs.css">/m);
+        expect(new Template('test').compile([], [])).to.match(/<link rel="stylesheet" href="css\/highlight\/vs.css">/m);
     });
 
     it('should include specified highlight theme', () => {
-        expect(new Template('test', 'zenburn').compile([], [])).to.match(/<link rel="stylesheet" href="\/css\/highlight\/zenburn.css">/m);
+        expect(new Template('test', 'zenburn').compile([], [])).to.match(/<link rel="stylesheet" href="css\/highlight\/zenburn.css">/m);
     });
 
     it('matches slides dir with template', () => {

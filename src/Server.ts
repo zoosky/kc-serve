@@ -14,13 +14,17 @@ export class Server {
             res.status(200).send(template.compile(await resolver.slides(), await resolver.css()));
         });
 
-        this.app.use(template.dirs.reveal, express.static(resolver.reveal()));
-        this.app.use(template.dirs.highlight, express.static(resolver.highlightCss()));
-        this.app.use(template.dirs.theme, express.static(resolver.theme()));
+        this.app.use(this.root(template.dirs.reveal), express.static(resolver.reveal()));
+        this.app.use(this.root(template.dirs.highlight), express.static(resolver.highlightCss()));
+        this.app.use(this.root(template.dirs.theme), express.static(resolver.theme()));
 
-        this.app.use('/img', express.static(resolver.dirs.img()));
-        this.app.use(template.dirs.css, express.static(resolver.dirs.css()));
-        this.app.use(template.dirs.slides, express.static(resolver.dirs.slides()));
+        this.app.use(this.root('img'), express.static(resolver.dirs.img()));
+        this.app.use(this.root(template.dirs.css), express.static(resolver.dirs.css()));
+        this.app.use(this.root(template.dirs.slides), express.static(resolver.dirs.slides()));
+    }
+
+    private root(folder: string): string {
+        return `/${folder}`;
     }
 
     listen() {
