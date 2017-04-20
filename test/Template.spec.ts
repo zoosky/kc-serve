@@ -4,7 +4,8 @@ import { Slide, SlideFolder } from '../src/SlideObject';
 
 describe('Template', () => {
     it('should render', () => {
-        expect(new Template('test').compile([], [])).to.match(/<div class="reveal"/m);
+        const result = new Template('test').compile([], []);
+        expect(result).to.match(/<div class="reveal"/m);
     });
 
     it('should list a slide', () => {
@@ -35,18 +36,18 @@ describe('Template', () => {
         expect(new Template('test', 'zenburn').compile([], [])).to.match(/<link rel="stylesheet" href="\/css\/highlight\/zenburn.css">/m);
     });
 
-    it ('matches slides dir with template', () => {
+    it('matches slides dir with template', () => {
         let template = new Template('test');
-        expect(template.compile([ new Slide('01-test.md') ], [])).to.contain(template.dirs.slides);
+        expect(template.compile([new Slide('01-test.md')], [])).to.contain(template.dirs.slides);
     });
 
-    it ('matches slides dir with template', () => {
+    it('matches slides dir with template', () => {
         let template = new Template('test');
-        expect(template.compile([ new Slide('01-test.md') ], [])).to.contain(`data-markdown="${template.dirs.slides}/01-test.md`);
+        expect(template.compile([new Slide('01-test.md')], [])).to.contain(`data-markdown="${template.dirs.slides}/01-test.md`);
     });
 
-    it ('matches css dir with template', () => {
+    it('matches css dir with template', () => {
         let template = new Template('test');
-        expect(template.compile([], [ 'custom.css' ])).to.contain(`href="${template.dirs.css}/custom.css"`);
+        expect(template.compile([], ['custom.css'])).to.contain(`href="${template.dirs.css}/custom.css"`);
     });
 });
