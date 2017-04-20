@@ -46,6 +46,7 @@
   "peerDependencies": {},
   "scripts": {
     "lint": "tslint -p .",
+    "prepublishOnly": "npm test",
     "prebuild": "node clean.js",
     "build": "tsc -p .",
     "postbuild": "npm run lint",
