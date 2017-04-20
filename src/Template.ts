@@ -1,15 +1,5 @@
-import * as fs from 'fs';
-import * as path from 'path';
-import * as handlebars from 'handlebars';
-
+import { html } from './template/reveal';
 import { SlideObject } from './SlideObject';
-
-const dir = path.join(__dirname, 'template');
-const html = path.join(dir, 'reveal.html');
-const slide = path.join(dir, 'slide.html');
-handlebars.registerPartial('slide', fs.readFileSync(slide).toString());
-
-const template = handlebars.compile(fs.readFileSync(html).toString());
 
 export class Template {
     dirs = {
@@ -24,12 +14,27 @@ export class Template {
     }
 
     compile(slides: SlideObject[], css: string[]) {
-        return template({ 
+        const context: TemplateContext = {
             slides,
             css,
             title: this.title,
             highlightTheme: this.highlightTheme,
             dirs: this.dirs
-        });
+        };
+        return html(context);
     }
+}
+
+export interface TemplateContext {
+    slides: SlideObject[];
+    css: string[];
+    title: string;
+    highlightTheme: string;
+    dirs: {
+        slides: string;
+        css: string;
+        theme: string;
+        reveal: string;
+        highlight: string;
+    };
 }

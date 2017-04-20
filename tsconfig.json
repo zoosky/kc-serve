@@ -11,6 +11,8 @@
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitThis": true,
-        "importHelpers": true
+        "importHelpers": true,
+        "jsx": "react",
+        "jsxFactory": "elements.createElement"
     }
 }

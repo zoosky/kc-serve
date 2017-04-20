@@ -77,4 +77,5 @@ reports/
 # TypeScript
 test/*.js
 src/*.js
+src/template/*.js
 *.map
