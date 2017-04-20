@@ -3,11 +3,11 @@ import { SlideObject } from './SlideObject';
 
 export class Template {
     dirs = {
-        slides: '/slides',
-        css: '/css',
-        theme: '/theme',
-        reveal: '/reveal',
-        highlight: '/css/highlight'
+        slides: 'slides',
+        css: 'css',
+        theme: 'theme',
+        reveal: 'reveal',
+        highlight: 'css/highlight'
     };
 
     constructor(private title: string, private highlightTheme: string = 'vs') {
