@@ -1,19 +1,46 @@
 import { expect } from 'chai';
-import * as path from 'path';
 import * as fs from 'mz/fs';
 import { Printer } from '../src/Printer';
-import { Resolver } from '../src/Resolver';
-import { Template } from '../src/Template';
+import * as plugins from '../src/Plugins';
+import { Server } from '../src/Server';
+import * as express from 'express';
+import { Slide } from '../src/SlideObject';
 
 describe('Printer', function () {
 
     this.timeout(10000);
 
     it('should output an pdf', async () => {
-        const cwd = path.join(__dirname, 'test_data');
-        
-        await new Printer(new Template('print'), new Resolver(cwd), 3002).print('slides.pdf');
-        expect(await fs.exists('slides.pdf')).to.be.true;
+        let reveal = new plugins.Reveal();
+        let highlight = new plugins.Highlight();
+        let theme = new plugins.Theme();
+
+        let slides = { 
+            path: '/slides', 
+            resolve: () => Promise.resolve([new Slide('title.md')]),
+            attach: (app: express.Express) => app.get('/slides/*', (_: any, res: express.Response) => res.status(200).send('# TEST').end())
+        };
+
+        let template = new plugins.Template(
+            'test',
+            reveal,
+            { path: '/css', resolve: () => Promise.resolve([])},
+            highlight,
+            slides,
+            theme,
+        );
+
+        let server = new Server([template, reveal, highlight, theme, slides], 8383);
+
+        let output = 'slides.pdf';
+        if (await fs.exists(output)) {
+            await fs.unlink(output);
+        }
+
+        await new Printer(server, reveal).print(output);
+        await server.close();
+
+        expect(await fs.exists(output)).to.be.true;
     });
 });
 

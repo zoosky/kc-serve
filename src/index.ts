@@ -3,9 +3,8 @@ import * as path from 'path';
 import * as program from 'commander';
 import { Server } from './Server';
 import { Printer } from './Printer';
-import { Resolver } from './Resolver';
+import * as plugins from './Plugins';
 import * as debugFn from 'debug';
-import { Template } from './Template';
 
 const debug = debugFn('kc:index');
 
@@ -27,11 +26,22 @@ program
     debug('dir: ', dir);
     debug('options: ', options);
     const cwd = dir || path.join(process.cwd());
-    const resolver = new Resolver(cwd);
+    let reveal = new plugins.Reveal();
+    let css = new plugins.Css(cwd);
+    let highlight = new plugins.Highlight();
+    let slides = new plugins.Slides(cwd);
+    let theme = new plugins.Theme();
+
+    let template = new plugins.Template('kc - help',
+        reveal,
+        css,
+        highlight,
+        slides,
+        theme
+    );
 
     const url = await new Server(
-      new Template(path.basename(process.cwd())),
-      resolver,
+      [reveal, css, highlight, slides, theme, template],
       options.port || 3000
     ).listen();
     open(options.open, url);
@@ -42,13 +52,26 @@ program
   .description('print presentation')
   .action(async (file: string, dir: string) => {
     const cwd = dir || process.cwd();
-    const resolver = new Resolver(cwd);
+    let reveal = new plugins.Reveal();
+    let css = new plugins.Css(cwd);
+    let highlight = new plugins.Highlight();
+    let slides = new plugins.Slides(cwd);
+    let theme = new plugins.Theme();
 
-    await new Printer(
-      new Template(path.basename(process.cwd())),
-      resolver, 
+    let template = new plugins.Template('kc - help',
+        reveal,
+        css,
+        highlight,
+        slides,
+        theme
+    );
+
+    let server = new Server(
+      [reveal, css, highlight, slides, theme, template], 
       2999
-    ).print(file || 'slides.pdf');
+    );
+
+    await new Printer(server, reveal).print(file || 'slides.pdf');
     console.log('Done.');
   });
 
@@ -57,9 +80,23 @@ program
   .description('view presentation on how to create slick presentations')
   .action(async () => {
     const cwd = path.join(__dirname, 'help');
+    let reveal = new plugins.Reveal();
+    let css = new plugins.Css(cwd);
+    let highlight = new plugins.Highlight();
+    let slides = new plugins.Slides(cwd);
+    let theme = new plugins.Theme();
+    let img = new plugins.Img(cwd);
+
+    let template = new plugins.Template('kc - help',
+        reveal,
+        css,
+        highlight,
+        slides,
+        theme
+    );
+    
     const url = await new Server(
-      new Template('kc - help'),
-      new Resolver(cwd),
+      [reveal, css, highlight, slides, theme, template, img],
       3001).listen();
     open(true, url);
   });

@@ -1,30 +1,20 @@
 import * as express from 'express';
-import { Resolver } from './Resolver';
-import { Template } from './Template';
 import * as http from 'http';
 
+export interface RequestHandler {
+    attach(app: express.Express): void;
+}
 export class Server {
 
     public server: http.Server;
     private app: express.Express;
 
-    constructor(template: Template, resolver: Resolver, private port: number) {
+    constructor(plugins: RequestHandler[], private port: number) {
         this.app = express();
-        this.app.get('/', async (_, res) => {
-            res.status(200).send(template.compile(await resolver.slides(), await resolver.css()));
+
+        plugins.forEach(_ => {
+            _.attach(this.app);
         });
-
-        this.app.use(this.root(template.dirs.reveal), express.static(resolver.reveal()));
-        this.app.use(this.root(template.dirs.highlight), express.static(resolver.highlightCss()));
-        this.app.use(this.root(template.dirs.theme), express.static(resolver.theme()));
-
-        this.app.use(this.root('img'), express.static(resolver.dirs.img()));
-        this.app.use(this.root(template.dirs.css), express.static(resolver.dirs.css()));
-        this.app.use(this.root(template.dirs.slides), express.static(resolver.dirs.slides()));
-    }
-
-    private root(folder: string): string {
-        return `/${folder}`;
     }
 
     listen() {

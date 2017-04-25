@@ -1,7 +1,19 @@
-import { TemplateContext } from '../Template';
-import { Slide } from '../SlideObject';
+import { Slide, SlideObject } from '../SlideObject';
 import * as elements from 'typed-html';
 import * as slideTemplate from './slide';
+export interface TemplateContext {
+    slides: SlideObject[];
+    css: string[];
+    title: string;
+    highlightTheme: string;
+    dirs: {
+        slides: string;
+        css: string;
+        theme: string;
+        reveal: string;
+        highlight: string;
+    };
+}
 
 export function html(context: TemplateContext) {
   const { dirs, highlightTheme, css, slides } = context;
@@ -27,13 +39,13 @@ export function html(context: TemplateContext) {
     <body>
       <div class="reveal">
         <div class="slides">
-          {slides.map(slide => {
-            if (slide.isFolder) {
+          {slides.map(_ => {
+            if (_.isFolder) {
               return <section>
-                {slide.slides.map(slideHtml)}
+                {_.slides.map(slideHtml)}
               </section>;
             } else {
-              return slideHtml(slide);
+              return slideHtml(_);
             }
           })}
         </div>

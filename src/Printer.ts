@@ -1,18 +1,16 @@
 import * as path from 'path';
 import { Server } from './Server';
-import { Resolver } from './Resolver';
 const spawn = require('cross-spawn');
-import { Template } from './Template';
+import { Reveal } from './plugins/Reveal';
 
 export class Printer {
 
-    constructor(private template: Template, private resolver: Resolver, private port: number) {
+    constructor(private server: Server, private reveal: Reveal) {
     }
 
     async print(file: string) {
-        const server = new Server(this.template, this.resolver, this.port);
-        const url = await server.listen();
-        const plugin = path.join(this.resolver.reveal(), 'plugin', 'print-pdf', 'print-pdf.js');
+        const url = await this.server.listen();
+        const plugin = path.join(this.reveal.root, 'plugin', 'print-pdf', 'print-pdf.js');
         const cp = spawn('phantomjs', [plugin, `${url}?print-pdf`, file]);
 
         return new Promise<void>(resolve => {
@@ -21,6 +19,6 @@ export class Printer {
                     resolve();
                 }
             });
-        }).then(() => server.close());
+        });
     }
 }
