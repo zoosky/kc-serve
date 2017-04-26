@@ -11,7 +11,7 @@ module.exports = function(config){
     ],
     testRunner: 'mocha',
     testFramework: 'mocha',
-    coverageAnalysis: 'perTest',
+    coverageAnalysis: 'all',
     reporter: ['clear-text', 'html', 'progress']
   });
 }

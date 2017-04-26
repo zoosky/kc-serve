@@ -11,6 +11,23 @@ describe('Server', () => {
             expect(address).to.be.eq('http://localhost:8885/');
             return server.close();
         });
+
+        it('open same port twice', async () => {
+            const server1 = new Server([], 8889);
+            const server2 = new Server([], 8889);
+            
+            await server1.listen();
+            try {
+                await server2.listen();
+                expect.fail();
+            }
+            catch (err) {
+                expect(err.toString()).to.eq('Error: listen EADDRINUSE :::8889');
+            }
+            finally {
+                await server1.close();
+            }
+        });
     });
 
     describe('close', () => {

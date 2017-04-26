@@ -19,12 +19,11 @@ export class Server {
 
     listen() {
         return new Promise<string>((resolve, reject) => {
-            this.server = this.app.listen(this.port, (err: any) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(`http://localhost:${this.server.address().port}/`);
-                }
+            this.server = http.createServer(this.app);
+            this.server.on('error', e => reject(e));
+
+            this.server.listen(this.port, () => {
+                resolve(`http://localhost:${this.server.address().port}/`);
             });
         });
     }
