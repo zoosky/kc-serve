@@ -8,7 +8,7 @@ import { Slide } from '../src/SlideObject';
 
 describe('Printer', function () {
 
-    this.timeout(10000);
+    this.timeout(20000);
 
     it('should output an pdf', async () => {
         let reveal = new plugins.Reveal();
