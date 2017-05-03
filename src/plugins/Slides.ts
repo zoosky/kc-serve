@@ -15,16 +15,16 @@ export class Slides {
 
     async resolve(): Promise<SlideObject[]> {
         return (await fs.exists(this.root)) ?
-            Slides.readTree(this.root) :
+            this.readTree() :
             Promise.resolve([]);
     }
         
-    private static readTree(dir: string): Promise<SlideObject[]> {
+    private readTree(): Promise<SlideObject[]> {
         return new Promise<SlideObject[]>((resolve, reject) => {
             let items = new Array<string>();
-            let emitter = walk(dir);
+            let emitter = walk(this.root);
 
-            emitter.on('file', (name: string, _stat: any) => items.push(path.relative(dir, name)));
+            emitter.on('file', (name: string, _stat: any) => items.push(path.relative(this.root, name)));
             emitter.on('end', () => resolve(SlideConvert.from(items)));
             emitter.on('error', reject);
         });

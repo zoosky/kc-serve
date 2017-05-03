@@ -12,9 +12,7 @@ export class Server {
     constructor(plugins: RequestHandler[], private port: number) {
         this.app = express();
 
-        plugins.forEach(_ => {
-            _.attach(this.app);
-        });
+        plugins.forEach(_ => _.attach(this.app));
     }
 
     listen() {
@@ -22,9 +20,8 @@ export class Server {
             this.server = http.createServer(this.app);
             this.server.on('error', e => reject(e));
 
-            this.server.listen(this.port, () => {
-                resolve(`http://localhost:${this.server.address().port}/`);
-            });
+            this.server.listen(this.port, () =>
+                resolve(`http://localhost:${this.server.address().port}/`));
         });
     }
 
