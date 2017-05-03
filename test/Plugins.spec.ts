@@ -43,19 +43,19 @@ describe('Plugin', () => {
 
     describe('reveal', () => {
         it('root matches the package location of reveal.js', () => {
-            expect(new plugins.Reveal().root).to.match(/[\\/]kc-cli[\\/]node_modules[\\/]reveal.js$/g);
+            expect(new plugins.Reveal().root).to.contain(path.join('kc-cli', 'node_modules', 'reveal.js'));
         });
     });
 
     describe('highlight', () => {
         it('root matches the package location of highlight.js', () => {
-            expect(new plugins.Highlight().root).to.match(/[\\/]kc-cli[\\/]node_modules[\\/]highlight.js\/styles$/g);
+            expect(new plugins.Highlight().root).to.contain(path.join('kc-cli', 'node_modules', 'highlight.js', 'styles'));
         });
     });
 
     describe('theme', () => {
         it ('root matches theme folder location', () => {
-            expect(new plugins.Theme().root).to.match(/src\/theme/g);
+            expect(new plugins.Theme().root).to.contain(path.join('src', 'theme'));
         });
     });
 
