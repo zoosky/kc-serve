@@ -1,15 +1,9 @@
 import * as path from 'path';
-import * as express from 'express';
+import { StaticBase } from './StaticBase';
 
-export class Theme {
-    root: string;
-    path = '/theme';
-
+export class Theme extends StaticBase {
     constructor() {
-        this.root = path.join(__dirname, '..', 'theme');
-    }
-
-    attach(app: express.Express) {
-        app.use(this.path, express.static(this.root));
+        let root = path.join(__dirname, '..', 'theme');
+        super(root, '/theme');
     }
 }

@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as http from 'http';
 
-export interface RequestHandler {
+export interface ServerPlugin {
     attach(app: express.Express): void;
 }
 export class Server {
@@ -9,7 +9,7 @@ export class Server {
     public server: http.Server;
     private app: express.Express;
 
-    constructor(plugins: RequestHandler[], private port: number) {
+    constructor(plugins: ServerPlugin[], private port: number) {
         this.app = express();
 
         plugins.forEach(_ => _.attach(this.app));

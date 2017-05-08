@@ -1,15 +1,9 @@
 import * as path from 'path';
-import * as express from 'express';
+import { StaticBase } from './StaticBase';
 
-export class Reveal {
-    root: string;
-    path = '/reveal';
-
+export class Reveal extends StaticBase {
     constructor() {
-        this.root = path.resolve(require.resolve('reveal.js'), '..', '..');
-    }
-
-    attach(app: express.Express) {
-        app.use(this.path, express.static(this.root));
+        let root = path.resolve(require.resolve('reveal.js'), '..', '..');
+        super(root, '/reveal');
     }
 }
