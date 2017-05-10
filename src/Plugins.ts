@@ -1,4 +1,4 @@
-export { Css } from './plugins/Css';
+export { CustomCss } from './plugins/CustomCss';
 export { Highlight } from './plugins/Highlight';
 export { Img } from './plugins/Img';
 export { Reveal } from './plugins/Reveal';

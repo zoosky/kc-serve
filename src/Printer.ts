@@ -1,20 +1,20 @@
 import * as path from 'path';
-import { Server } from './Server';
 const spawn = require('cross-spawn');
 import { Reveal } from './plugins/Reveal';
+const debug = require('debug')('kc:print');
 
 export class Printer {
 
-    constructor(private server: Server, private reveal: Reveal) {
+    constructor(private reveal: Reveal) {
     }
 
-    async print(file: string) {
-        const url = await this.server.listen();
+    async print(url: string, file: string) {
         const plugin = path.join(this.reveal.root, 'plugin', 'print-pdf', 'print-pdf.js');
         const cp = spawn('phantomjs', [plugin, `${url}?print-pdf`, file]);
 
         return new Promise<void>(resolve => {
             cp.stdout.on('data', async (data: Buffer | string) => {
+                debug(data);
                 if (data.toString().match(/Export PDF: Finished successfully!/g)) {
                     resolve();
                 }

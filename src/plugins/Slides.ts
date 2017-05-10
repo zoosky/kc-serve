@@ -2,6 +2,7 @@ import * as path from 'path';
 import * as express from 'express';
 import * as fs from 'mz/fs';
 import { SlideConvert, SlideObject } from '../SlideObject';
+const debug = require('debug')('kc:plugins:slides');
 const walk = require('walkdir');
 
 export class Slides {
@@ -11,12 +12,24 @@ export class Slides {
 
     constructor(cwd: string) {
         this.root = path.join(cwd, 'slides');
+        debug(this.root);
+    }
+
+    wrap(item: any) {
+        debug(item);
+        return item;
     }
 
     async resolve(): Promise<SlideObject[]> {
-        return (await fs.exists(this.root)) ?
-            this.readTree() :
-            Promise.resolve([]);
+        if (await fs.exists(this.root)) {
+            let result = this.readTree();
+            debug(result);
+
+            return result;
+        } else {
+            debug(`no slides resolved from root ${this.root}`);
+            return Promise.resolve([]);
+        }
     }
         
     private readTree(): Promise<SlideObject[]> {
