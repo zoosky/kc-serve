@@ -78,4 +78,5 @@ reports/
 test/*.js
 src/*.js
 src/**/*.js
+test/**/*.js
 *.map
