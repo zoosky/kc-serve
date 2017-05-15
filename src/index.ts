@@ -3,9 +3,8 @@ import * as path from 'path';
 import * as program from 'commander';
 import { Server } from './Server';
 import { Printer } from './Printer';
-import { Resolver } from './Resolver';
 import * as debugFn from 'debug';
-import { Template } from './Template';
+import { Reveal } from './plugins/Reveal';
 
 const debug = debugFn('kc:index');
 
@@ -27,13 +26,7 @@ program
     debug('dir: ', dir);
     debug('options: ', options);
     const cwd = dir || path.join(process.cwd());
-    const resolver = new Resolver(cwd);
-
-    const url = await new Server(
-      new Template(path.basename(process.cwd())),
-      resolver,
-      options.port || 3000
-    ).listen();
+    const url = await Server.create(cwd, '').listen(options.port || 3000);
     open(options.open, url);
   });
 
@@ -42,13 +35,12 @@ program
   .description('print presentation')
   .action(async (file: string, dir: string) => {
     const cwd = dir || process.cwd();
-    const resolver = new Resolver(cwd);
+    let server = Server.create(cwd, 'print');
+    let url = await server.listen(2999);
 
-    await new Printer(
-      new Template(path.basename(process.cwd())),
-      resolver, 
-      2999
-    ).print(file || 'slides.pdf');
+    await new Printer(new Reveal()).print(url, file || 'slides.pdf');
+    server.close();
+
     console.log('Done.');
   });
 
@@ -57,10 +49,7 @@ program
   .description('view presentation on how to create slick presentations')
   .action(async () => {
     const cwd = path.join(__dirname, 'help');
-    const url = await new Server(
-      new Template('kc - help'),
-      new Resolver(cwd),
-      3001).listen();
+    const url = await Server.create(cwd, 'kc - help').listen(3001);
     open(true, url);
   });
 

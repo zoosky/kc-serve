@@ -1,41 +1,30 @@
 import * as express from 'express';
-import { Resolver } from './Resolver';
-import { Template } from './Template';
 import * as http from 'http';
 
+import * as plugins from './Plugins';
+import * as templates from './template/all';
+
+export interface ServerPlugin {
+    attach(app: express.Express): void;
+}
 export class Server {
 
     public server: http.Server;
     private app: express.Express;
 
-    constructor(template: Template, resolver: Resolver, private port: number) {
+    constructor(plugins: ServerPlugin[]) {
         this.app = express();
-        this.app.get('/', async (_, res) => {
-            res.status(200).send(template.compile(await resolver.slides(), await resolver.css()));
-        });
 
-        this.app.use(this.root(template.dirs.reveal), express.static(resolver.reveal()));
-        this.app.use(this.root(template.dirs.highlight), express.static(resolver.highlightCss()));
-        this.app.use(this.root(template.dirs.theme), express.static(resolver.theme()));
-
-        this.app.use(this.root('img'), express.static(resolver.dirs.img()));
-        this.app.use(this.root(template.dirs.css), express.static(resolver.dirs.css()));
-        this.app.use(this.root(template.dirs.slides), express.static(resolver.dirs.slides()));
+        plugins.forEach(_ => _.attach(this.app));
     }
 
-    private root(folder: string): string {
-        return `/${folder}`;
-    }
-
-    listen() {
+    listen(port: number) {
         return new Promise<string>((resolve, reject) => {
-            this.server = this.app.listen(this.port, (err: any) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(`http://localhost:${this.server.address().port}/`);
-                }
-            });
+            this.server = http.createServer(this.app);
+            this.server.on('error', e => reject(e));
+
+            this.server.listen(port, () =>
+                resolve(`http://localhost:${this.server.address().port}/`));
         });
     }
 
@@ -49,5 +38,29 @@ export class Server {
                 }
             });
         });
+    }
+
+    static create(cwd: string, title: string): Server {
+        let reveal = new plugins.Reveal();
+        let css = new plugins.CustomCss(cwd);
+        let highlight = new plugins.Highlight();
+        let slides = new plugins.Slides(cwd);
+        let theme = new plugins.Theme();
+        let img = new plugins.Img(cwd);
+
+        let index = new templates.Index(title, 
+        [
+            new templates.Reveal.Css(reveal.path),
+            new templates.Theme(theme.path),
+            new templates.CustomCss(css, css.path),
+            new templates.Reveal.PdfScript(reveal.path)
+        ], 
+        [ 
+            new templates.Slides(slides, slides.path),
+            new templates.Reveal.MainScript(reveal.path)
+        ]);
+        let template = new plugins.Template(index);
+        
+        return new Server([reveal, css, highlight, slides, theme, template, img]);
     }
 }

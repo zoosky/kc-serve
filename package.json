@@ -51,7 +51,7 @@
     "build": "tsc -p .",
     "postbuild": "npm run lint",
     "pretest": "npm run build",
-    "test": "mocha",
+    "test": "mocha --recursive",
     "start": "tsc -w -p .",
     "stryker": "stryker run stryker.conf.js"
   },
