@@ -4,7 +4,6 @@ import * as program from 'commander';
 import { Server } from './Server';
 import { Printer } from './Printer';
 import * as debugFn from 'debug';
-import { Reveal } from './plugins/Reveal';
 
 const debug = debugFn('kc:index');
 
@@ -38,7 +37,7 @@ program
     let server = Server.create(cwd, 'print');
     let url = await server.listen(2999);
 
-    await new Printer(new Reveal()).print(url, file || 'slides.pdf');
+    await new Printer().print(url, file || 'slides.pdf');
     server.close();
 
     console.log('Done.');

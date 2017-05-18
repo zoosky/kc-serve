@@ -1,11 +1,11 @@
 {
   "name": "@infosupport/kc-cli",
-  "version": "2.1.0-beta4",
+  "version": "2.1.0-beta5",
   "description": "cli for Info Support Kenniscentrum (KC)",
   "main": "index.js",
   "dependencies": {
     "commander": "^2.9.0",
-    "cross-spawn": "^5.1.0",
+    "electron-pdf": "^1.3.0",
     "express": "^4.15.2",
     "highlight.js": "^9.10.0",
     "lodash": "^4.17.4",
@@ -13,6 +13,7 @@
     "natural-compare": "^1.4.0",
     "opn": "^4.0.2",
     "reveal.js": "https://github.com/hakimel/reveal.js/tarball/30f2af0ac512534e7d66ed60514f07f14a8bb6d7",
+    "spawn-please": "^0.2.0",
     "tslib": "^1.6.0",
     "typed-html": "^0.3.1",
     "walkdir": "0.0.11"

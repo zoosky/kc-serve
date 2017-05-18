@@ -1,7 +1,6 @@
 import { expect } from 'chai';
 import * as fs from 'mz/fs';
 import { Printer } from '../src/Printer';
-import * as plugins from '../src/Plugins';
 import { Server } from '../src/Server';
 
 describe('Printer', function () {
@@ -19,7 +18,7 @@ describe('Printer', function () {
             await fs.unlink(output);
         }
 
-        await new Printer(new plugins.Reveal()).print(url, output);
+        await new Printer().print(url, output);
         await server.close();
 
         expect(await fs.exists(output)).to.be.true;
