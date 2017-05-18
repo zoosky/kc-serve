@@ -4,4 +4,5 @@
 !package.json
 !README.md
 **/*.ts
+**/*.tsx
 **/*.js.map
