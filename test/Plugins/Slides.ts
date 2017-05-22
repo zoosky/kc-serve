@@ -30,7 +30,7 @@ describe('slides', () => {
         });
     });
 
-    describe('attached', () => {
+    describe('attach', () => {
         let server: Server;
         const cwd = path.join(__dirname, '..', 'test_data');
 

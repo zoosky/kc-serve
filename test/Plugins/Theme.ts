@@ -5,8 +5,10 @@ import Server from '../../src/Server';
 import * as request from 'supertest';
 
 describe('Theme', () => {
-    it ('root matches theme folder location', () => {
-        expect(new plugin().root).to.contain(path.join('@infosupport', 'kc-cli-theme'));
+    describe('dir', () => {
+        it('matches theme folder location', () => {
+            expect(new plugin().dir).to.contain(path.join('@infosupport', 'kc-cli-theme'));
+        });
     });
 
     describe('attach', () => {
@@ -17,7 +19,7 @@ describe('Theme', () => {
         });
 
         it('serves theme files to /theme', async () => {
-            server = new Server([ new plugin() ]);
+            server = new Server([new plugin()]);
             await server.listen(0);
 
             await request(server.server)

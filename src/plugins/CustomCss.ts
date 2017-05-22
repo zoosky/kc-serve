@@ -8,8 +8,8 @@ export default class extends StaticBase {
     }
 
     async resolve(): Promise<string[]> {
-        return (await fs.exists(this.root)) ?
-            fs.readdir(this.root) :
+        return (await fs.exists(this.dir)) ? 
+            fs.readdir(this.dir) :
             Promise.resolve([]);
     }
 }
