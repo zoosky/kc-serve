@@ -1,7 +1,10 @@
-Voeg notities toe met behulp van:
 ```markdown
-note‌: ⁣Dit is een handig scherm voor op een tweede monitor!
+note‌: ⁣
+This will only display in the notes window.
 ```
-Druk op 'S' om het scherm met speaker notes te openen.
+Press the `'s'` key on your keyboard to open the notes window.
 
-note: Dit is een handig scherm voor op een tweede monitor!
+[reveal.js/#speaker-notes](https://github.com/hakimel/reveal.js#speaker-notes)
+
+note: 
+This will only display in the notes window.
