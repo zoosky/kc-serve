@@ -51,7 +51,7 @@ export default class Server {
         let index = new templates.Index(title, 
         [
             new templates.Reveal.Css(reveal.path),
-            new templates.Theme(theme.path),
+            new templates.Theme(theme.css),
             new templates.CustomCss(css, css.path),
             new templates.Reveal.PdfScript(reveal.path)
         ], 
