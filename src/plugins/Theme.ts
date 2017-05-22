@@ -1,9 +1,12 @@
 import * as path from 'path';
 import StaticBase from './StaticBase';
+const debug = require('debug')('kc:plugins:theme');
 
 export default class extends StaticBase {
     constructor() {
-        let root = path.join(__dirname, '..', 'theme');
-        super(root, '/theme');
+        let pkg = require.resolve('@infosupport/kc-cli-theme');
+        debug(pkg);
+
+        super(path.dirname(pkg), '/theme');
     }
 }

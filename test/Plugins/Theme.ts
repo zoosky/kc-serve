@@ -5,8 +5,8 @@ import Server from '../../src/Server';
 import * as request from 'supertest';
 
 describe('Theme', () => {
-    it('root matches theme folder location', () => {
-        expect(new plugin().root).to.contain(path.join('src', 'theme'));
+    it ('root matches theme folder location', () => {
+        expect(new plugin().root).to.contain(path.join('@infosupport', 'kc-cli-theme'));
     });
 
     describe('attach', () => {
