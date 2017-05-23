@@ -1,23 +1,22 @@
 import * as elements from 'typed-html';
 import { TemplatePart } from './Index';
 
-export namespace Reveal {
-    export class Css implements TemplatePart {
-        constructor (private path: string) {
-        }
-
-        public render(): string {
-            return <link rel="stylesheet" href={`${this.path}/css/reveal.css`}></link>;
-        }
+export class Css implements TemplatePart {
+    constructor(private path: string) {
     }
 
-    export class PdfScript implements TemplatePart {
-        constructor (private path: string) {
-        }
+    public render(): string {
+        return <link rel="stylesheet" href={`${this.path}/css/reveal.css`}></link>;
+    }
+}
 
-        public render(): string {
-            return <script>
-          {`
+export class PdfScript implements TemplatePart {
+    constructor(private path: string) {
+    }
+
+    public render(): string {
+        return <script>
+            {`
                 // Printing and PDF exports
                 var link = document.createElement( 'link' );
                 link.rel = 'stylesheet';
@@ -26,19 +25,19 @@ export namespace Reveal {
                 document.getElementsByTagName( 'head' )[0].appendChild( link );
           `}
         </script>;
-        }
+    }
+}
+
+export class MainScript implements TemplatePart {
+    constructor(private path: string) {
     }
 
-    export class MainScript implements TemplatePart {
-        constructor (private path: string) {
-        }
+    public render(): string {
+        return <p>
+            <script src={`${this.path}/lib/js/head.min.js`}></script>
+            <script src={`${this.path}/js/reveal.js`}></script>
 
-        public render(): string {
-            return <p>
-                <script src={`${this.path}/lib/js/head.min.js`}></script>
-                <script src={`${this.path}/js/reveal.js`}></script>
-
-                <script>
+            <script>
                 {`
                     function extend() {
                         var target = {};
@@ -81,8 +80,7 @@ export namespace Reveal {
                     options = extend(defaultOptions, options, queryOptions);
                     Reveal.initialize(options);
                     `}
-                </script>
-            </p>;
-        }
+            </script>
+        </p>;
     }
 }
