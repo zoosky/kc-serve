@@ -4,12 +4,9 @@ import { Printer } from '../src/Printer';
 import { Server } from '../src/Server';
 
 describe('Printer', function () {
-
     this.timeout(20000);
 
     it('should output an pdf', async () => {
-        
-
         let server = Server.create('asdf', 'print');
         let url = await server.listen(8383);
 
