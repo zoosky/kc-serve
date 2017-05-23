@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import * as templates from '../../src/template/all';
-import { Slides } from '../../src/template/Slides';
+import Slides from '../../src/template/Slides';
 import { Slide, SlideFolder, SlideObject } from '../../src/SlideObject';
 
 describe('Slides template', () => {

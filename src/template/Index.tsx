@@ -4,7 +4,7 @@ export interface TemplatePart {
    render(): Promise<string> | string;
 }
 
-export class Index implements TemplatePart {
+export default class implements TemplatePart {
     constructor(private title: string, 
       private head: TemplatePart[],
       private body: TemplatePart[]) {

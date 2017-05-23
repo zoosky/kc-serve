@@ -1,7 +1,7 @@
 import * as path from 'path';
-import { StaticBase } from './StaticBase';
+import StaticBase from './StaticBase';
 
-export class Theme extends StaticBase {
+export default class extends StaticBase {
     constructor() {
         let root = path.join(__dirname, '..', 'theme');
         super(root, '/theme');

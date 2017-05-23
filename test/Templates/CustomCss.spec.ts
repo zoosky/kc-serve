@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { CustomCss } from '../../src/template/CustomCss';
+import CustomCss from '../../src/template/CustomCss';
 
 describe('Css template', () => {
     it('includes custom css', async () => {

@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import * as fs from 'mz/fs';
-import { Printer } from '../src/Printer';
-import { Server } from '../src/Server';
+import Printer from '../src/Printer';
+import Server from '../src/Server';
 
 describe('Printer', function () {
     this.timeout(20000);

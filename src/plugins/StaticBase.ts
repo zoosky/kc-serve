@@ -1,15 +1,9 @@
-import * as fs from 'mz/fs';
 import * as express from 'express';
+import { ServerPlugin } from '../Server';
 
-export abstract class StaticBase {
+export default abstract class implements ServerPlugin {
     constructor(public root: string, public path: string) {
 
-    }
-
-    async resolve(): Promise<string[]> {
-        return (await fs.exists(this.root)) ? 
-            fs.readdir(this.root) :
-            Promise.resolve([]);
     }
 
     attach(app: express.Express) {

@@ -6,7 +6,7 @@ interface SlidesResolver {
     resolve(): Promise<SlideObject[]>;
 }
 
-export class Slides implements TemplatePart {
+export default class implements TemplatePart {
     constructor(private resolver: SlidesResolver, 
         private path: string) {
     }

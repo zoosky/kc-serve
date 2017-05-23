@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { Theme } from '../../src/template/Theme';
+import Theme from '../../src/template/Theme';
 
 describe('Theme template', () => {
     it('includes css', () => {

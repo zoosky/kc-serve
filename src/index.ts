@@ -1,8 +1,8 @@
 import * as opn from 'opn';
 import * as path from 'path';
 import * as program from 'commander';
-import { Server } from './Server';
-import { Printer } from './Printer';
+import Server from './Server';
+import Printer from './Printer';
 import * as chalk from 'chalk';
 
 const debug = require('debug')('kc:index');

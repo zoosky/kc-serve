@@ -1,4 +1,4 @@
-import { Server } from '../src/Server';
+import Server from '../src/Server';
 import { expect } from 'chai';
 import * as request from 'supertest';
 import * as path from 'path';

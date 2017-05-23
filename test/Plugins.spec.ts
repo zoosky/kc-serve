@@ -1,8 +1,8 @@
 import * as path from 'path';
-import * as plugins from '../src/Plugins';
+import * as plugins from '../src/plugins/all';
 import { Slide, SlideFolder } from '../src/SlideObject';
 import { expect } from 'chai';
-import { Server } from '../src/Server';
+import Server from '../src/Server';
 import * as request from 'supertest';
 import * as templates from '../src/template/all';
 

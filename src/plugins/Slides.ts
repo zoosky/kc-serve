@@ -2,10 +2,11 @@ import * as path from 'path';
 import * as express from 'express';
 import * as fs from 'mz/fs';
 import { SlideConvert, SlideObject } from '../SlideObject';
+import { ServerPlugin } from '../Server';
 const debug = require('debug')('kc:plugins:slides');
 const walk = require('walkdir');
 
-export class Slides {
+export default class implements ServerPlugin {
     public readonly root: string;
 
     path = '/slides';
