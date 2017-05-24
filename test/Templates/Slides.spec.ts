@@ -28,6 +28,16 @@ describe('Slides template', () => {
         expect(await new template(resolver, '/slides').render()).to.match(/<section>[\n\r\s]*<section data-markdown="\/slides\/00-intro.md"/m);
     });
 
+    it('write the normal vertical separator for root level slides', async () => {
+        slides = [new Slide('00-intro.md')];
+        expect(await new template(resolver, '/slides').render()).to.match(/data-separator="\^---\$"/m);
+    });
+
+    it('write a different vertical separator for nested slides', async () => {
+        slides = [new SlideFolder('01-folder', [new Slide('00-intro.md')])];
+        expect(await new template(resolver, '/slides').render()).to.match(/data-separator="\^---\?\$"/m);
+    });
+
     it('does not list a html slide yet', async () => {
         slides = [new Slide('00-intro.html')];
         expect(await new template(resolver, '/slides').render()).to.not.match(/00-intro.html/m);
