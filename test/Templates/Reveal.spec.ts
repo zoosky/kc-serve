@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { Reveal } from '../../src/template/Reveal';
+import * as Reveal from '../../src/template/Reveal';
 
 describe('Reveal template', () => {
     it('includes css', () => {

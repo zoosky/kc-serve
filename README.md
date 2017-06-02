@@ -21,6 +21,7 @@ option               | description
 ---------------------|--------------
 `kc serve`           | host presentation from current directory on default port
 `kc serve -o`        | open presentation in default browser
+`kc serve -p`        | host presentation on random free port
 `kc serve -p <port>` | host presentation on specificed `<port>`
 `kc serve [dir]`     | host presentation from specified directory
 
@@ -29,6 +30,7 @@ option               | description
 option                  | description
 ------------------------|--------------
 `kc print`              | print presentation from current directory to pdf 
+`kc print -o`           | open pdf after printing
 `kc print [file]`       | print presentation using specified filename
 `kc print [file] [dir]` | print presenation using specified filename from directory
 

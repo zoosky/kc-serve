@@ -1,7 +1,7 @@
 import * as elements from 'typed-html';
 import { TemplatePart } from './Index';
 
-export class Theme implements TemplatePart {
+export default class implements TemplatePart {
     constructor (private root: string) {
     }
 

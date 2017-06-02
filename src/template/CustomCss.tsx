@@ -5,7 +5,7 @@ interface CustomCssResolver {
     resolve: () => Promise<string[]>;
 }
 
-export class CustomCss implements TemplatePart {
+export default class implements TemplatePart {
     constructor (private resolver: CustomCssResolver, 
         private path: string) {
     }

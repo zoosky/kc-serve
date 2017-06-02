@@ -1,7 +1,8 @@
-import { Index } from '../template/Index';
+import Index from '../template/Index';
+import { ServerPlugin } from '../Server';
 import * as express from 'express';
 
-export class Template {
+export default class implements ServerPlugin {
     path = '/';
 
     constructor(private index: Index) {

@@ -1,13 +1,13 @@
 import * as express from 'express';
 import * as http from 'http';
 
-import * as plugins from './Plugins';
+import * as plugins from './plugins/all';
 import * as templates from './template/all';
 
 export interface ServerPlugin {
     attach(app: express.Express): void;
 }
-export class Server {
+export default class Server {
 
     public server: http.Server;
     private app: express.Express;
