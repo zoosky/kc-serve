@@ -4,9 +4,9 @@ import * as program from 'commander';
 import Server from './Server';
 import Printer from './Printer';
 import * as chalk from 'chalk';
+import print from '@infosupport/kc-pdf';
 
 const debug = require('debug')('kc:index');
-const error = chalk.bold.red;
 
 program
   .version(require('../package.json').version);
@@ -33,39 +33,60 @@ program
     }
     catch (err) {
       if (err.code === 'EADDRINUSE') {
-        console.log('Port %s  is already in use. Probably another presentation running?.', chalk.bold(port.toString()));
+        console.error(chalk.red('Port %s is already in use. Probably another presentation running?.'), chalk.bold(port.toString()));
         console.log('  Hint: grab a random port with %s or choose one with %s.', chalk.bold('-p'), chalk.bold('-p [port]'));
         console.log('  Hint: combine it to %s to open the presentation in the browser.', chalk.bold('-op'));
       } else {
-        console.error(error(err.message));
+        console.error(chalk.red(err.message));
       }
     }
   });
 
 interface PrintOptions {
   open: boolean;
+  slides: boolean;
+  labs: boolean;
 }
 
 program
-  .command('print [file] [dir]')
-  .description('print presentation to pdf')
-  .option('-o, --open', 'open pdf after printing')
-  .action(async (file: string, dir: string, options: PrintOptions) => {
-    dir = dir || process.cwd();
-    file = file || 'slides.pdf';
+  .command('print')
+  .description('print presentation and slides to pdf')
+  .option('-o, --open', 'open output file(s) after printing')
+  .option('--no-slides', 'skip printing slides')
+  .option('--no-labs', 'skip printing labs')
+  .action(async (options: PrintOptions) => {
+    debug(options);
+
+    const slidesFile = 'slides.pdf';
+    const labsFile = 'labs.pdf';
 
     try {
-      let server = Server.create(dir, 'print');
-      let url = await server.listen(0);
+      if (options.slides) {
+        let server = Server.create(process.cwd(), 'print');
+        let url = await server.listen(0);
 
-      await new Printer().print(url, file);
-      server.close();
+        await new Printer().print(url, slidesFile);
+        server.close();
 
-      if (options.open) {
-        opn(file, { wait: false });
+        if (options.open) {
+          opn(slidesFile, { wait: false });
+        }
+      }
+
+      if (options.labs) {
+        await print(['labs'], labsFile);
+        if (options.open) {
+          opn(labsFile, { wait: false });
+        }
       }
     } catch (err) {
-      console.error(error(err.message));
+      debug(err);
+      if (err.message === 'ENOENT: no such file or directory, lstat \'labs\'') {
+        console.error(chalk.red('No %s folder found. Use %s to skip printing labs.'), chalk.bold('labs'), chalk.bold('--no-labs'));
+        console.log('  Hint: see %s for instructions on creating labs.', chalk.bold('kc help'));
+      } else {
+        console.error(chalk.red(err.message));
+      }
     }
   });
 
@@ -81,9 +102,9 @@ program
       open(true, url);
     } catch (err) {
       if (err.code === 'EADDRINUSE') {
-        console.log('Port %s in use, probably another %s instance already running.', chalk.bold(port.toString()), chalk.bold('kc help'));
+        console.error(chalk.red('Port %s in use, probably another %s instance already running.'), chalk.bold(port.toString()), chalk.bold('kc help'));
       } else {
-        console.error(error(err.message));
+        console.error(chalk.red(err.message));
       }
     }
   });

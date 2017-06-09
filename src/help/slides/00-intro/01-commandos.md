@@ -6,11 +6,10 @@ kc serve [options] [dir]
     -o, --open         open presentation in the default browser 
     [dir]              (sub) directory where /slides is located (optional)
 
-kc print [options] [file] [dir]
-    -o, --open         open pdf after printing
-    [file]             output file name (optional)
-    [dir]              (sub) directory where /slides, 
-                         /css and /img are located (optional)
+kc print [options]
+    -o, --open         open output file(s) after printing
+    --no-labs          skip printing labs
+    --no-slides        skip printing slides
 
 kc help
 ```

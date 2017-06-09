@@ -29,10 +29,10 @@ option               | description
 
 option                  | description
 ------------------------|--------------
-`kc print`              | print presentation from current directory to pdf 
-`kc print -o`           | open pdf after printing
-`kc print [file]`       | print presentation using specified filename
-`kc print [file] [dir]` | print presenation using specified filename from directory
+`kc print`              | print presentation and labs to pdf 
+`kc print -o`           | open output file(s) after printing
+`kc print --no-labs`    | skip printing labs
+`kc print --no-slides`  | skip printing slides
 
 ### Help
 option         | description
