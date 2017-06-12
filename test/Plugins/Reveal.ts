@@ -5,8 +5,10 @@ import Server from '../../src/Server';
 import * as request from 'supertest';
 
 describe('Reveal', () => {
-    it('root matches the package location of reveal.js', () => {
-        expect(new plugin().root).to.contain(path.join('kc-serve', 'node_modules', 'reveal.js'));
+    describe('dir', () => {
+        it('matches the package location of reveal.js', () => {
+            expect(new plugin().dir).to.contain(path.join('kc-serve', 'node_modules', 'reveal.js'));
+        });
     });
 
     describe('attach', () => {
@@ -16,8 +18,8 @@ describe('Reveal', () => {
             return server.close();
         });
 
-        it('serves reveal files to /reveal', async() => {
-            server = new Server([  new plugin() ]);
+        it('serves reveal files to /reveal', async () => {
+            server = new Server([new plugin()]);
             await server.listen(0);
 
             request(server.server)

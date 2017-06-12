@@ -5,10 +5,11 @@ import Server from '../../src/Server';
 import * as request from 'supertest';
 
 describe('highlight', () => {
-        it('root matches the package location of highlight.js', () => {
-            expect(new plugin().root).to.contain(path.join('kc-serve', 'node_modules', 'highlight.js', 'styles'));
+    describe('dir', () => {
+        it('matches the package location of highlight.js', () => {
+            expect(new plugin().dir).to.contain(path.join('kc-serve', 'node_modules', 'highlight.js', 'styles'));
         });
-
+    });
 
     describe('attach', () => {
         let server: Server;
@@ -18,7 +19,7 @@ describe('highlight', () => {
         });
 
         it('serves highlight files to /highlight', async () => {
-            server = new Server([ new plugin() ]);
+            server = new Server([new plugin()]);
             await server.listen(0);
 
             await request(server.server)

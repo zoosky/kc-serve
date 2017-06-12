@@ -25,7 +25,7 @@ export default function (cwd: string, title: string): Server {
     let index = new IndexTemplate(title,
         [
             new RevealTemplate.Css(reveal.path),
-            new ThemeTemplate(theme.path),
+            new ThemeTemplate(theme.css),
             new CustomCssTemplate(css, css.path),
             new RevealTemplate.PdfScript(reveal.path)
         ],
