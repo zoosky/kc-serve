@@ -4,13 +4,13 @@ import * as path from 'path';
 import create from '../src/Index';
 import Server from '../src/Server';
 
-describe('create', () => {
+describe('Index', () => {
     let server: Server;
 
     before(async () => {
         const cwd = path.join(__dirname, 'test_data');
 
-        server = create(cwd, 'all-for-one');
+        server = create({ cwd: cwd, title: 'all-for-one', theme: 'reveal.js/css/theme/beige.css', highlight: 'highlight.js/styles/vs.css' });
         await server.listen(0);
     });
 
@@ -24,7 +24,7 @@ describe('create', () => {
             .expect(200)
             .expect((res: request.Response) => expect(res.text).to.match(/demo.css/m))
             .expect((res: request.Response) => expect(res.text).to.match(/00-title.md/m))
-            .expect((res: request.Response) => expect(res.text).to.match(/infosupport.css/m))
+            .expect((res: request.Response) => expect(res.text).to.match(/beige.css/m))
             .expect((res: request.Response) => expect(res.text).to.match(/\js\/reveal.js/m))
             .expect((res: request.Response) => expect(res.text).to.match(/\/css\/print\/pdf.css/m));
     });
@@ -50,7 +50,7 @@ describe('create', () => {
 
         it('theme', async () => {
             await request(server.server)
-                .get('/theme/infosupport.css')
+                .get('/theme/beige.css')
                 .expect(200);
         });
 

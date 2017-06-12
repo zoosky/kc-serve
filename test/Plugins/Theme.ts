@@ -1,4 +1,3 @@
-import * as path from 'path';
 import plugin from '../../src/plugins/Theme';
 import { expect } from 'chai';
 import Server from '../../src/Server';
@@ -7,7 +6,7 @@ import * as request from 'supertest';
 describe('Theme', () => {
     describe('dir', () => {
         it('matches theme folder location', () => {
-            expect(new plugin().dir).to.contain(path.join('@infosupport', 'kc-cli-theme'));
+            expect(new plugin('reveal.js/css/theme/beige.css').dir).to.contain('reveal.js');
         });
     });
 
@@ -19,13 +18,13 @@ describe('Theme', () => {
         });
 
         it('serves theme files to /theme', async () => {
-            server = new Server([new plugin()]);
+            server = new Server([new plugin('reveal.js/css/theme/beige.css')]);
             await server.listen(0);
 
             await request(server.server)
-                .get('/theme/infosupport.css')
-                .expect((res: request.Response) => expect(res.text).to.match(/Info Support theme for reveal.js presentations/m))
-                .expect(200);
+                .get('/theme/beige.css')
+                .expect(200)
+                .expect((res: request.Response) => expect(res.text).to.match(/Beige theme for reveal.js./m));
         });
     });
 });

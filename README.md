@@ -6,8 +6,21 @@ Inspired by [reveal-md](https://github.com/webpro/reveal-md).
 
 ```typescript
 import serve from '@infosupport/kc-serve';
-let url = await serve(process.cwd(), 'title').listen(port);
+let url = await serve(
+        process.cwd(), 
+        'title',
+        'reveal.js/css/theme/beige.css',
+        'highlight.js/styles/darkula.css')
+    .listen(port);
 ```
+
+## Options
+option          | description
+----------------|--------------
+cwd             | working folder
+title           | presentation title
+theme           | resolve to `reveal.js` theme (can be custom package, like `'@infosupport/kc-cli-theme'`)
+highlight       | resolve to `highlight.js` style
 
 ## Special Folders
 folder         | description

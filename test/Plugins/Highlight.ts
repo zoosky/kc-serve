@@ -7,7 +7,7 @@ import * as request from 'supertest';
 describe('highlight', () => {
     describe('dir', () => {
         it('matches the package location of highlight.js', () => {
-            expect(new plugin().dir).to.contain(path.join('kc-serve', 'node_modules', 'highlight.js', 'styles'));
+            expect(new plugin('highlight.js/styles/vs.css').dir).to.contain(path.join('kc-serve', 'node_modules', 'highlight.js', 'styles'));
         });
     });
 
@@ -19,13 +19,13 @@ describe('highlight', () => {
         });
 
         it('serves highlight files to /highlight', async () => {
-            server = new Server([new plugin()]);
+            server = new Server([new plugin('highlight.js/styles/vs.css')]);
             await server.listen(0);
 
             await request(server.server)
                 .get('/css/highlight/vs.css')
-                .expect((res: request.Response) => expect(res.text).to.match(/Visual Studio-like style based on original C# coloring by Jason Diamond <jason@diamond.name>/m))
-                .expect(200);
+                .expect(200)
+                .expect((res: request.Response) => expect(res.text).to.match(/Visual Studio-like style based on original C# coloring by Jason Diamond <jason@diamond.name>/m));
         });
     });
 });

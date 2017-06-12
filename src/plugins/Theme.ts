@@ -5,8 +5,8 @@ const debug = require('debug')('kc:plugins:theme');
 export default class extends StaticBase {
     public readonly css: string;
     
-    constructor() {
-        let pkg = require.resolve('@infosupport/kc-cli-theme');
+    constructor(theme: string) {
+        let pkg = require.resolve(theme);
         debug(pkg);
 
         super(path.dirname(pkg), '/theme');

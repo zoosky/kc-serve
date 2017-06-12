@@ -16,7 +16,6 @@ export default class implements TemplatePart {
           <meta charset="utf-8"></meta>
           <title>{this.title}</title>
           {await Promise.all(this.head.map(_ => _.render()))}
-          <link rel="stylesheet" href="css/highlight/vs.css"></link>
         </head>
         <body>
           {await Promise.all(this.body.map(_ => _.render()))}
