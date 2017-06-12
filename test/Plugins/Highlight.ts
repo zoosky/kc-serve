@@ -6,7 +6,7 @@ import * as request from 'supertest';
 
 describe('highlight', () => {
         it('root matches the package location of highlight.js', () => {
-            expect(new plugin().root).to.contain(path.join('kc-cli', 'node_modules', 'highlight.js', 'styles'));
+            expect(new plugin().root).to.contain(path.join('kc-serve', 'node_modules', 'highlight.js', 'styles'));
         });
 
 

@@ -3,7 +3,7 @@ import { TemplatePart } from './Index';
 import * as elements from 'typed-html';
 import * as path from 'path';
 
-interface SlidesResolver {
+export interface SlidesResolver {
     resolve(): Promise<SlideObject[]>;
 }
 

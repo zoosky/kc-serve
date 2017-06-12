@@ -1,7 +1,7 @@
 import * as elements from 'typed-html';
 import { TemplatePart } from './Index';
 
-interface CustomCssResolver {
+export interface CustomCssResolver {
     resolve: () => Promise<string[]>;
 }
 

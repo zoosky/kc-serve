@@ -3,6 +3,7 @@
 !src/**
 !package.json
 !README.md
+!**/*.d.ts
 **/*.ts
 **/*.tsx
 **/*.js.map

@@ -6,7 +6,7 @@ import * as request from 'supertest';
 
 describe('Reveal', () => {
     it('root matches the package location of reveal.js', () => {
-        expect(new plugin().root).to.contain(path.join('kc-cli', 'node_modules', 'reveal.js'));
+        expect(new plugin().root).to.contain(path.join('kc-serve', 'node_modules', 'reveal.js'));
     });
 
     describe('attach', () => {

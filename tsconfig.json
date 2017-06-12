@@ -13,6 +13,7 @@
         "noImplicitThis": true,
         "importHelpers": true,
         "jsx": "react",
-        "jsxFactory": "elements.createElement"
+        "jsxFactory": "elements.createElement",
+        "declaration": true
     }
 }

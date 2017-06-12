@@ -2,42 +2,12 @@
 
 Inspired by [reveal-md](https://github.com/webpro/reveal-md).
 
-## Install
-```
-npm i -g @infosupport/kc-cli
-```
-
 ## Usage
-Just 3 simple steps:
 
-1. Open Visual Studio Code (or any other lightweight IDE)
-1. Start `kc serve` from the (integrated) terminal
-1. Create a `./slides` folder and add markdown slides 
-
-## Options
-
-### Serve
-option               | description
----------------------|--------------
-`kc serve`           | host presentation from current directory on default port
-`kc serve -o`        | open presentation in default browser
-`kc serve -p`        | host presentation on random free port
-`kc serve -p <port>` | host presentation on specificed `<port>`
-`kc serve [dir]`     | host presentation from specified directory
-
-### Print
-
-option                  | description
-------------------------|--------------
-`kc print`              | print presentation and labs to pdf 
-`kc print -o`           | open output file(s) after printing
-`kc print --no-labs`    | skip printing labs
-`kc print --no-slides`  | skip printing slides
-
-### Help
-option         | description
----------------|--------------
-`kc help`      | open help presentation with examples and usage
+```typescript
+import serve from '@infosupport/kc-serve';
+let url = await serve(process.cwd(), 'title').listen(port);
+```
 
 ## Special Folders
 folder         | description
@@ -55,7 +25,5 @@ folder         | description
 * Put images in an `./img` folder and refer from a markdown slide with `![description](img/your-image.jpg)`
 * Style images from the custom-css with a selector on the alt-text `img[alt='description']` or filename `img[src='img/your-image.jpg']`
 
-For more examples and usage see `kc help`!
-
 ## Notes
-The only supported theme currently is designed for [Info Support b.v.](http://infosupport.com) and the non-configurable highlight theme is `vs.css`.
+This package only is a **library** for serving presentations. You'll need a CLI (like [@infosupport/kc-cli](https://www.npmjs.com/package/@infosupport/kc-cli)) to do the actual hosting.

@@ -80,3 +80,4 @@ src/*.js
 src/**/*.js
 test/**/*.js
 *.map
+*.d.ts
