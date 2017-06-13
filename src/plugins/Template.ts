@@ -1,7 +1,6 @@
 import Index from '../template/Index';
 import { ServerPlugin } from '../Server';
 import * as express from 'express';
-const debug = require('debug')('kc:template:template');
 
 export default class implements ServerPlugin {
     path = '/';
@@ -9,10 +8,9 @@ export default class implements ServerPlugin {
     constructor(private index: Index) {
     }
 
-    attach(app: express.Express) {
-        app.use(this.path, async (req: express.Request, res: express.Response, next) => { 
-            debug(req);
+    handler() {
+        return async (_req: express.Request, res: express.Response, _next: express.NextFunction) => { 
             res.status(200).send(await this.index.render());
-        });
+        };
     }
 }

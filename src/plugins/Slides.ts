@@ -36,7 +36,7 @@ export default class implements ServerPlugin {
         });
     }
 
-    attach(app: express.Express) {
-        app.use(this.path, express.static(this.dir));
+    public handler(): express.Handler {
+        return express.static(this.dir);
     }
 }

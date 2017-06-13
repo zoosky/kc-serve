@@ -2,7 +2,8 @@ import * as express from 'express';
 import * as http from 'http';
 
 export interface ServerPlugin {
-    attach(app: express.Express): void;
+    path: string;
+    handler  (): express.Handler;
 }
 export default class Server {
 
@@ -12,7 +13,7 @@ export default class Server {
     constructor(plugins: ServerPlugin[]) {
         this.app = express();
 
-        plugins.forEach(_ => _.attach(this.app));
+        plugins.forEach(_ => this.app.use(_.path, _.handler()));
     }
 
     listen(port: number) {

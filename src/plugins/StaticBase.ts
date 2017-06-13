@@ -5,7 +5,7 @@ export default abstract class implements ServerPlugin {
     constructor(public dir: string, public path: string) {
     }
 
-    attach(app: express.Express) {
-        app.use(this.path, express.static(this.dir));
+    handler(): express.Handler {
+        return express.static(this.dir);
     }
 }
