@@ -7,17 +7,29 @@ import * as path from 'path';
 const argv = require('minimist')(process.argv.slice(2));
 
 if (!argv.help) {
+    start(argv.theme, argv.highlight, argv.port);
+} else {
+    usage();
+}
+
+function start(theme: string, highlight: string, port: number) {
     const dir = process.cwd();
 
-    serve({
-        cwd: dir,
-        title: path.basename(dir),
-        theme: argv.theme || 'reveal.js/css/theme/beige.css',
-        highlight: argv.highlight || 'highlight.js/styles/vs.css'
-    }).listen(argv.port || 0)
-        .then(url => console.log('Presentation started on %s', url))
-        .catch(err => console.error(err.message));
-} else {
+    try {
+        serve({
+            cwd: dir,
+            title: path.basename(dir),
+            theme:  theme || 'reveal.js/css/theme/beige.css',
+            highlight: highlight || 'highlight.js/styles/vs.css'
+        }).listen(port || 0)
+            .then(url => console.log('Presentation started on %s', url))
+            .catch(err => console.error(err.message));
+    } catch (err) {
+        console.error(err.message);
+    }
+}
+
+function usage() {
     console.log('Special folders:');
     console.log('  ./slides:\t slides (markdown, png, gif, jpg & svg)');
     console.log('  ./img:\t image files (from markdown: ![alt-text](img/your-image.jpg)');
