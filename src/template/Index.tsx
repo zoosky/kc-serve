@@ -1,25 +1,25 @@
 import * as elements from 'typed-html';
 
 export interface TemplatePart {
-   render(): Promise<string> | string;
+  head?(): Promise<string> | string;
+  body?(): Promise<string> | string;
 }
 
-export default class implements TemplatePart {
-    constructor(private title: string, 
-      private head: TemplatePart[],
-      private body: TemplatePart[]) {
-    }
-    
-    async render(): Promise<string> {
-      return <html lang="en">
-        <head>
-          <meta charset="utf-8"></meta>
-          <title>{this.title}</title>
-          {await Promise.all(this.head.map(_ => _.render()))}
-        </head>
-        <body>
-          {await Promise.all(this.body.map(_ => _.render()))}
-        </body>
-      </html>;
+export default class {
+  constructor(private title: string,
+    private parts: TemplatePart[]) {
+  }
+
+  async render(): Promise<string> {
+    return <html lang="en">
+      <head>
+        <meta charset="utf-8"></meta>
+        <title>{this.title}</title>
+        {await Promise.all(this.parts.map(_ => _.head ? _.head() : Promise.resolve('')))}
+      </head>
+      <body>
+        {await Promise.all(this.parts.map(_ => _.body ? _.body() : Promise.resolve('')))}
+      </body>
+    </html>;
   }
 }

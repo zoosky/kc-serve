@@ -12,7 +12,7 @@ export default class implements TemplatePart {
         private path: string) {
     }
 
-    public async render(): Promise<string> {
+    public async body(): Promise<string> {
       return <div class="reveal">
         <div class="slides">
           {await Promise.all((await this.resolver.resolve()).map(_ => {

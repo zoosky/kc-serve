@@ -5,7 +5,7 @@ export default class implements TemplatePart {
     constructor (private css: string) {
     }
 
-    public render(): string {
+    public head(): string {
         return <link rel="stylesheet" href={ this.css }></link>;
     }
 }

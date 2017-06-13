@@ -5,7 +5,7 @@ export class Css implements TemplatePart {
     constructor(private path: string) {
     }
 
-    public render(): string {
+    public head(): string {
         return <link rel="stylesheet" href={`${this.path}/css/reveal.css`}></link>;
     }
 }
@@ -14,7 +14,7 @@ export class PdfScript implements TemplatePart {
     constructor(private path: string) {
     }
 
-    public render(): string {
+    public head(): string {
         return <script>
             {`
                 // Printing and PDF exports
@@ -32,7 +32,7 @@ export class MainScript implements TemplatePart {
     constructor(private path: string) {
     }
 
-    public render(): string {
+    public body(): string {
         return <p>
             <script src={`${this.path}/lib/js/head.min.js`}></script>
             <script src={`${this.path}/js/reveal.js`}></script>

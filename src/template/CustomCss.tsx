@@ -10,7 +10,7 @@ export default class implements TemplatePart {
         private path: string) {
     }
 
-    public async render(): Promise<string> {
+    public async head(): Promise<string> {
         return (await Promise.all((await this.resolver.resolve()).map(_ => <link rel="stylesheet" href={`${this.path}/${_}`}></link>))).join('\n');
     }
 }

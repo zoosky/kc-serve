@@ -13,7 +13,7 @@ describe('Plugin', () => {
         });
 
         it('serves template to /', async () => {
-            server = new Server([ new plugin(new template('kc - help', [], [])) ]);
+            server = new Server([ new plugin(new template('kc - help', [])) ]);
             await server.listen(0);
 
             await request(server.server)
@@ -24,7 +24,7 @@ describe('Plugin', () => {
         it ('not cache body parts', async () => {
 
             let msg = 'first try';
-            let index = new template('test', [], [{ render: () => Promise.resolve(msg) }]);
+            let index = new template('test', [{ body: () => Promise.resolve(msg) }]);
 
             server = new Server([  new plugin(index) ]);
             await server.listen(8385);

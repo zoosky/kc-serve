@@ -36,9 +36,7 @@ export default function (options: Options): Server {
             new ThemeTemplate(themePlugin.css),
             new HighlightTemplate(highlightPlugin.css),
             new CustomCssTemplate(cssPlugin, cssPlugin.path),
-            new RevealTemplate.PdfScript(revealPlugin.path)
-        ],
-        [
+            new RevealTemplate.PdfScript(revealPlugin.path),
             new SlidesTemplate(slidesPlugin, slidesPlugin.path),
             new RevealTemplate.MainScript(revealPlugin.path)
         ]);
