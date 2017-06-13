@@ -4,14 +4,37 @@ Inspired by [reveal-md](https://github.com/webpro/reveal-md).
 
 ## Usage
 
+### Global
+```cli
+npm i -g @infosupport/kc-serve
+kc-serve --theme @infosupport/kc-cli-theme --highlight darkula
+```
+
+### Local
+```cli
+npm i --save @infosupport/kc-serve
+```
+
+package.json:
+```json
+  "scripts": {
+    "start": "kc-serve --theme @infosupport/kc-cli-theme --highlight darkula"
+  }
+```
+
+### Library
+TypeScript:
 ```typescript
 import serve from '@infosupport/kc-serve';
-let url = await serve(
-        process.cwd(), 
-        'title',
-        'reveal.js/css/theme/beige.css',
-        'darkula.css')
-    .listen(port);
+
+serve({
+    cwd: process.cwd(), 
+    title: 'title',
+    theme: 'beige', // or a package
+    highlight: 'darkula.css'
+}).listen(port)
+.then(url => console.log(url))
+.catch(err => console.error(err.message));
 ```
 
 ## Options
@@ -21,6 +44,7 @@ cwd             | working folder
 title           | presentation title
 theme           | resolve to `reveal.js` theme (can be custom package, like `'@infosupport/kc-cli-theme'`)
 highlight       | resolve to `highlight.js` style
+port            | serve from specified port (use 0 for random free port)
 
 ## Special Folders
 folder         | description
@@ -39,4 +63,4 @@ folder         | description
 * Style images from the custom-css with a selector on the alt-text `img[alt='description']` or filename `img[src='img/your-image.jpg']`
 
 ## Notes
-This package only is a **library** for serving presentations. You'll need a CLI (like [@infosupport/kc-cli](https://www.npmjs.com/package/@infosupport/kc-cli)) to do the actual hosting.
+Wrap your own CLI around the library to create a tool with a custom default theme and/or highlight style.
