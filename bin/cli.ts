@@ -37,9 +37,16 @@ function usage() {
     console.log('');
 
     console.log('Options:');
-    console.log('  --theme:\t resolve to reveal.js theme.');
-    console.log('  --highlight:\t resolve to highlight.js style.');
-    console.log('  --port:\t serve from specified port.');
+    console.log('  --theme:\t resolve to reveal.js theme');
+    console.log('  --highlight:\t resolve to highlight.js style');
+    console.log('  --port:\t serve from specified port');
+    console.log('');
+    console.log('  Pick a highlight style from https://highlightjs.org/static/demo/,');
+    console.log('    or use the css file name https://github.com/isagalaev/highlight.js/tree/master/src/styles');
+    console.log('');
+    console.log('  Use a default reveal.js theme: https://github.com/hakimel/reveal.js#theming,');
+    console.log('    or specify a package containing a custom theme,');
+    console.log('    or override (parts of) a theme with a custom css from the ./css folder');
     console.log('');
 
     console.log('Tips:');

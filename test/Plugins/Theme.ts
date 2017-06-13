@@ -8,6 +8,23 @@ describe('Theme', () => {
         it('matches theme folder location', () => {
             expect(new plugin('reveal.js/css/theme/beige.css').dir).to.contain('reveal.js');
         });
+
+        it('throws when style not resolved', () => {
+            try {
+                new plugin('some-non-existing-style');
+                expect.fail();
+            } catch (err) {
+                expect(err.message).to.contain('\'some-non-existing-style\' not found');
+            }
+        });
+    });
+
+    it('resolves to reveal if package not found', () => {
+        expect(new plugin('beige.css').dir).to.contain('reveal.js');
+    });
+
+    it('does not require filename extension for reveal themes', () => {
+        expect(new plugin('beige').dir).to.contain('reveal.js');
     });
 
     describe('attach', () => {

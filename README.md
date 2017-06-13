@@ -10,7 +10,7 @@ let url = await serve(
         process.cwd(), 
         'title',
         'reveal.js/css/theme/beige.css',
-        'highlight.js/styles/darkula.css')
+        'darkula.css')
     .listen(port);
 ```
 
