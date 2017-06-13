@@ -8,10 +8,10 @@
     "kc-serve": "bin/cli.js"
   },
   "dependencies": {
-    "commander": "^2.9.0",
     "express": "^4.15.2",
     "highlight.js": "^9.10.0",
     "lodash": "^4.17.4",
+    "minimist": "^1.2.0",
     "mz": "^2.6.0",
     "natural-compare": "^1.4.0",
     "reveal.js": "https://github.com/hakimel/reveal.js/tarball/30f2af0ac512534e7d66ed60514f07f14a8bb6d7",
@@ -23,10 +23,10 @@
   "devDependencies": {
     "@types/chai": "^3.4.35",
     "@types/chalk": "^0.4.31",
-    "@types/commander": "^2.9.1",
     "@types/debug": "0.0.29",
     "@types/express": "^4.0.35",
     "@types/lodash": "^4.14.61",
+    "@types/minimist": "^1.2.0",
     "@types/mocha": "^2.2.40",
     "@types/mz": "0.0.30",
     "@types/node": "^7.0.12",
