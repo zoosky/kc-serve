@@ -75,6 +75,7 @@ typings/
 reports/
 
 # TypeScript
+bin/*.js
 test/*.js
 src/*.js
 src/**/*.js
