@@ -7,6 +7,9 @@
   "bin": {
     "kc-serve": "bin/cli.js"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "express": "^4.15.2",
     "findup-sync": "^1.0.0",
@@ -15,7 +18,7 @@
     "minimist": "^1.2.0",
     "mz": "^2.6.0",
     "natural-compare": "^1.4.0",
-    "reveal.js": "https://github.com/hakimel/reveal.js/tarball/30f2af0ac512534e7d66ed60514f07f14a8bb6d7",
+    "reveal.js": "^3.5.0",
     "spawn-please": "^0.2.0",
     "tslib": "^1.6.0",
     "typed-html": "^0.3.1",
