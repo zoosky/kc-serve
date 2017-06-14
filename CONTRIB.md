@@ -21,9 +21,17 @@ npm run stryker | run mutation testing
 Mutation testing  [] 100% (ETC 0.0s)[66 killed] [0 survived] [0 no coverage] [0 timeout] [0 error]
 ```
 
-We encourage the *BDD* development style so write your expectations first, see it fail, and implement accordingly.
+We encourage the *BDD* development style. Write your expectations first, see it fail, make it pass.
+
+**Note:** With the progress on the *stryker* side new mutators introduced new mutants on typescript-generated code that unfortunately survive. For now you may safely ignore mutators like:
+
+```
+Mutator: BooleanSubstitution
+-   Object.defineProperty(exports, "__esModule", { value: true });
++   Object.defineProperty(exports, "__esModule", { value: false });
+```
 
 ## Testing
 
 `npm link .` to use your local copy directly  
-`npm i -g .` to install your local copy
+`npm i -g . --production` to install your local copy
