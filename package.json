@@ -1,6 +1,6 @@
 {
   "name": "@infosupport/kc-serve",
-  "version": "2.1.0-beta5",
+  "version": "2.1.1",
   "description": "serve @revealjs presentations straight from markdown and image files",
   "main": "src/Index.js",
   "types": "src/Index.d.ts",
@@ -64,18 +64,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://git@gitlab.rhea.infosupport.net:10022/kenniscentrum/kc-serve.git"
+    "url": "https://github.com/kc/kc-serve.git"
   },
   "keywords": [
     "reveal",
     "reveal.js",
     "cli",
     "kc",
-    "infosupport",
     "presentation",
     "slides",
-    "powerpoint"
+    "powerpoint",
+    "markdown"
   ],
   "author": "Manuel Riezebosch",
-  "license": "ISC"
+  "license": "Apache-2.0"
 }
