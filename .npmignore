@@ -6,4 +6,4 @@
 **/*.ts
 !**/*.d.ts
 **/*.tsx
-**/*.js.map
+**/*.js.maps

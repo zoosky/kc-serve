@@ -43,6 +43,7 @@
     "natural-compare": "^1.4.0",
     "stryker": "^0.6.4",
     "stryker-api": "^0.5.3",
+    "stryker-baseline-reporter": "0.0.3",
     "stryker-html-reporter": "^0.4.4",
     "stryker-mocha-runner": "^0.4.2",
     "supertest": "^3.0.0",
