@@ -31,6 +31,10 @@ describe('SlideObject', () => {
         it('zip should not be an image', () => {
             expect(new Slide('demo.zip').isImage).to.be.false;
         });
+
+        it('ignores casing in extension', () => {
+            expect(new Slide('bower.PNG').isImage).to.be.true;
+        });
     });
 });
 

@@ -12,7 +12,7 @@ export class Slide {
     constructor(public readonly name: string) {
         const extension = path.extname(name);
         this.isMarkdown = extension === '.md';
-        this.isImage = ['.png', '.gif', '.jpg', '.jpeg', '.svg'].some(ext => ext === extension);
+        this.isImage = ['.png', '.gif', '.jpg', '.jpeg', '.svg'].some(ext => ext === extension.toLowerCase());
     }
 }
 
